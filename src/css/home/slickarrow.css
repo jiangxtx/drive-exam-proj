@@ -1,0 +1,34 @@
+/*.slick-arrow .slick-prev{*/
+    /*!*top:-120px;*!*/
+    /*right:40px;*/
+/*}*/
+
+/*.slick-prev{*/
+    /*float:right;*/
+    /*!*top:120px;*!*/
+    /*margin-right: -40px;*/
+    /*left:0px;*/
+/*}*/
+
+
+/*.slick-next{*/
+    /*float:left;*/
+    /*!*top: -160px;*!*/
+    /*left:-40px;*/
+/*}*/
+.slick-prev{
+    top:50%
+}
+
+.slick-next{
+    top:47%
+}
+
+
+.slick-next:before, .slick-prev:before{
+    color:#2f5c89
+}
+
+#hotcourseCarousel .ant-btn-primary{
+    background: #2f5c89;
+}

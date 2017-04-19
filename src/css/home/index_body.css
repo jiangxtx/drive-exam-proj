@@ -1,0 +1,36 @@
+
+.verticalCarouselItem{
+    height:200px;
+    /*border:1px solid #dedede;*/
+    padding:10px;
+}
+
+
+.hotCourseItemStyle{
+    background-color:#dedede;
+    padding:5px;
+    height:100%;
+}
+
+.hotCourseItemStyle:hover{
+    background-color: #2f5c89;
+    padding:5px;
+    height:100%
+}
+
+.hotCourseItemStyle:hover p,.hotCourseItemStyle:hover p:last-child{
+    color:#fff
+}
+
+.hotCourseItemStyle p{
+    color:#000;
+    margin:5px;
+}
+
+
+.hotCourseItemStyle p:last-child{
+    color: #7e7e7e;
+    margin-left: 5px
+}
+
+

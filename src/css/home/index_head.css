@@ -1,0 +1,58 @@
+.headTop{
+    background-color: #2f5c89;
+    width:100%;
+    color:#fff;
+    min-height:90px;
+    line-height:90px;
+}
+.headTop a:hover {
+    color: #ffff00;
+    text-underline: none;
+}
+
+
+.headLogo{
+    padding-left:0px;
+    min-height:50px;
+}
+.headLogo-title {
+    font-size: 30px;
+    /*line-height: 90px;*/
+}
+.headLogo-title a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.headLogin{
+    float:right;
+    margin-right:20px
+}
+.headLogin a {
+    color: #fff;
+}
+.link-active {
+    color: yellow !important;
+}
+
+
+.head-manageList .ant-menu {
+    /*line-height: 90px;*/
+    background-color: #2f5c89;
+    color: #bed8fa !important;
+    text-align: center;
+}
+.head-manageList .ant-menu-item-selected, .head-manageList .ant-menu-item-active {
+    color: #2f5c89;
+    background-color: #fcfcfc;
+    /* opacity: 0.5; */
+}
+.head-manageList .ant-menu-item-selected:hover, .head-manageList .ant-menu-item-active:hover,
+.head-manageList .ant-menu-item:hover {
+    color: #2f5c89;
+    background-color: #fcfcfc;
+    /* opacity: 0.5; */
+}
+.head-list-icon {
+    margin-top: 12px;
+}

@@ -1,0 +1,23 @@
+/* Words Show in One Line, no matter how long these words are. */
+.b_wsol {
+    overflow: hidden;
+    white-space: nowrap;
+    word-break: break-all;
+    text-overflow: ellipsis;
+}
+
+.listItem {
+    line-height: 42px;
+    border-bottom: 1px solid #ededed;
+    font-size: 14px;
+    font-family: 微软雅黑, MicrosoftYaHei;
+    margin: 5px 0;
+}
+.listItem:hover {
+    color: #2f5c89;
+    cursor: pointer;
+}
+.listItem-time {
+    float: right;
+    margin-right: 2%;
+}

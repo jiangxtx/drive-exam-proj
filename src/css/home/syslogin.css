@@ -1,0 +1,43 @@
+.cartoon {
+    position: absolute;
+    /*//top: -110px;*/
+    top:-6.8rem;
+    left: 50%;
+    margin-left: -77px;
+    width: 155px; height: 110px;
+    background: url("http://xfw8.sinaapp.com/webapp/static/mobile/image/cartoon-head.png") no-repeat center center;
+    background-size: 155px;
+}
+.cartoon .hand-left {
+    position: absolute;
+    left: -10px;
+    bottom: -50px;
+    width: 37px;
+    height: 50px;
+    background: url("http://xfw8.sinaapp.com/webapp/static/mobile/image/cartoon-hand-left.png") no-repeat center center;
+    background-size: 37px;
+}
+.cartoon .hand-right {
+    position: absolute;
+    right: -10px;
+
+    bottom: -50px;
+    width: 37px;
+    height: 50px;
+    background: url("http://xfw8.sinaapp.com/webapp/static/mobile/image/cartoon-hand-right.png") no-repeat center center;
+    background-size: 37px;
+}
+.cartoon .hand {
+    position: absolute;
+    z-index: 1;
+    top: -10px;
+    right: 0;
+    width: 25px;
+    height: 15px;
+    background: #FCC4A9;
+    border-radius: 100%;
+}
+.cartoon .hand-right .hand {
+    right: auto;
+    left: 0;
+}

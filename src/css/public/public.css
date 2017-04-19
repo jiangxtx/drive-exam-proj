@@ -1,0 +1,88 @@
+.bodyFont{
+ font-size: 14px;
+}
+
+/* Words Show in One Line, no matter how long these words are. */
+.b_wsol {
+ overflow: hidden;
+ white-space: nowrap;
+ word-break: break-all;
+ text-overflow: ellipsis;
+}
+
+.bcolor {
+ background-color: #2f5c89;
+}
+
+img {
+ max-width: 100%;
+ max-height: 100%;
+ vertical-align: middle;
+}
+
+.dn {
+ display: none !important;
+}
+
+
+
+/* MoreButton style */
+.showMoreBtn {
+ background-color: #fff;
+ border: 1px solid #2f5c89;
+ border-radius: 0;
+ color: #2f5c89;
+ /*font-size: 1rem;*/
+ height: 50px;
+ width: 18%;
+ cursor:pointer;
+}
+.showMoreBtn:hover {
+ background-color: #2f5c89;
+ border: 1px solid #2f5c89;
+ color: #fff;
+ cursor:pointer;
+}
+
+
+/* KeyvalLine style --BEGIN */
+.inblock {
+ font-size: 15px;
+ margin: 15px 0;
+ display: block;
+ height: 20px;
+}
+.inblock-key {
+ color: #000;
+ display: inline-block;
+ float: left;
+ font-family: "Arial","Hiragino Sans GB","Microsoft YaHei",΢���ź�,"Helvetica","sans-serif";
+ text-align: right;
+ width: 30%;
+ min-width: 80px;
+}
+.inblock-val {
+ color: #626262;
+}
+.titleLine {
+    font-size: 30px;
+    padding: 25px;
+    text-align: center;
+}
+/* KeyvalLine style --END */
+
+.btn-single-operat {
+    font-size: 16px;
+    background-color: #2f5c89;
+    margin: 23px auto;
+}
+
+/* ImgIcon style --BEGIN */
+.img-icon {
+ width: 20px;
+ border-radius: 50%;
+ margin-right: 3px;
+ cursor: pointer;
+}
+/* ImgIcon style --END */
+

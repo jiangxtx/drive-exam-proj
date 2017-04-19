@@ -1,0 +1,13 @@
+.manage-homeList-ol {
+    background-color: #000;
+    margin-left: -15px;
+    text-align: center;
+}
+.manage-homeList-li {
+    height: 47px;
+    line-height: 47px;
+    /* color: #fff; */
+}
+.manage-homeList-li a {
+    color: #fff;
+}

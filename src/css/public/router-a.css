@@ -1,0 +1,19 @@
+/**
+    自己用 a 标签组建的模拟 tabs 页导航路由菜单 style
+ */
+
+
+.route-item {
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    background-color: #2f5c89;
+    padding: 5px 8px;
+    color: #fff;
+}
+
+.route-active {
+    background-color: #f0f0f0;
+    color: #2f5c89;
+}

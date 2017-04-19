@@ -1,0 +1,9 @@
+.courseshow-item {
+    background: rgb(238,238,238);
+    padding:10px;
+    min-height: 350px;
+}
+.courseshow-item:hover {
+    cursor: pointer;
+    box-shadow: 3px 3px 3px #888888;
+}

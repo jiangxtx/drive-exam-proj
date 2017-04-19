@@ -1,0 +1,9 @@
+.divide {
+    margin: 10px;
+}
+.cert-item {
+    line-height: 60px;
+    border: 1px solid #ededed;
+    padding: 8px;
+    text-align: center;
+}

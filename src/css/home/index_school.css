@@ -1,0 +1,47 @@
+.schoolitem-icon {
+    border-radius: 50%;
+    height: 80px;
+    margin-top: -40px;
+    max-height: 100px;
+    max-width: 100px;
+    position: relative;
+    width: 80px;
+    z-index: 12;
+}
+.schoolitem-pannel {
+    position: relative;
+    height: 366px;
+    background-color: #eeeeee;
+    margin: 10px;
+    text-align: center;
+}
+.schoolitem-name {
+    font-size:18px;
+    margin-top: 8px;
+}
+.schoolitem-img {
+    height: 266px;
+    width: 100%;
+    padding: 6px;
+}
+.itemScreen {
+    display: inline;
+    z-index: 10;
+    background-color: rgba(0,0,0,0.6);
+    height: 266px;
+    color: #fff;
+    width: 100%;
+    position: absolute;
+}
+.itemScreen-title {
+    margin-top: 30px;
+}
+.itemScreen-descp {
+    font-size:14px;
+    margin: 14px;
+    max-height: 200px;
+    overflow: hidden;
+}
+.teacher-info-descp {
+    white-space: normal;
+}

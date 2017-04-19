@@ -1,0 +1,67 @@
+.index-main::before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    margin-right: -0.25em;
+    vertical-align: middle;
+}
+.index-main {
+    height: 100%;
+    min-height: 71rem;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #f0f0f0;
+}
+.index-main {
+    margin-bottom: -42px;
+    min-height: 100%;
+}
+
+.loginPanel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 280px;
+    text-align: center;
+    margin-top: -140px;
+    margin-left: -200px;
+}
+.successPanel {
+    height: 480px;
+    margin-top: -280px;
+}
+.login-form-button {
+    width: 100%;
+}
+/*
+ .login-form {
+    max-width: 300px;
+}
+*/
+.login-form-forgot {
+    float: right;
+}
+.loginPanel-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.successPanel .ant-card-head {
+    height: 88px;
+}
+.loginPanel-sidetitle {
+    font-size: 14px;
+    font-weight: 100;
+    color: red;
+}
+.loginPanel-titleSuccess {
+    line-height: 40px;
+    padding-top: 10px;
+}
+.loginPanel-titleSuccess .anticon {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #ff8000;
+}
+

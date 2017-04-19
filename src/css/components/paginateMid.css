@@ -1,0 +1,9 @@
+/* control Pagination style --BEGIN */
+.pagination-panel {
+    margin: 40px auto 56px auto;
+    text-align: right;
+}
+.ant-pagination {
+    display: inline-block;
+}
+/* control Pagination style --END */

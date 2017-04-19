@@ -1,0 +1,32 @@
+.homeList .ant-card-body {
+     padding: 0;
+}
+.homeList .ant-card-head {
+    background-color: #f0f0f0;
+}
+.homeList .ant-card-head-title {
+    color: #2f5c89;
+}
+.ant-card-head-title {
+    font-size: 16px;
+}
+.cardBlue .ant-card-head {
+    background-color: #2f5c89;
+    color: #fff;
+}
+.bcitem-more {
+    color: #fff;
+}
+.bcitem-more:hover {
+    color: yellow;
+}
+.item-active {
+    background-color: #2a6496;
+    padding: 5px;
+    margin: 0 5px;
+    color: #fff;
+    border-radius: 2px;
+}
+/*a:hover {
+    color: yellow;
+}*/

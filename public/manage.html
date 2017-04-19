@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员管理-研究性学习平台</title>
+    <link ref="shortcut icon" href="/src/img/favicon.ico" type="image/x-icon"/>
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- judge currrent browser Version  -->
+    <script src="../src/Tool/util.browser.js"></script>
+
+    <!-- 适配 IE 兼容性，IE9 以下不考虑兼容。尤其是适配 IE9，部分在IE10 中也有问题。 -->
+    <script src="../src/Tool/polyfill.js"></script>
+    <script src="../src/Tool/media.match.min.js"></script>
+
+    <!-- 首先引入公用的第三方库，诸如：react/antd/react-dom/react-router...详见 webpack.config.js 配置 -->
+    <script src="../dist/lib.js" charset="utf-8"></script>
+
+    <script src="../static/manage.js" charset="utf-8"></script>
+</body>
+</html>

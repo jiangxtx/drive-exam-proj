@@ -1,0 +1,151 @@
+.courseImg {
+    height: 100%;
+    max-height: 600px;
+    width: 100%;
+    vertical-align: middle;
+    display: block;
+}
+
+.teacher-info {
+    background-color: #f0f0f0;
+    padding: 5px;
+    height: 150px;
+    overflow: hidden;
+}
+.teacher-info-detail {
+    display: none;
+}
+.teacher-info-pd:hover > .teacher-info-detail {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 30%;
+    overflow: auto;
+    z-index: 5000;
+    background: #f0f0f0;
+    border: 1px solid #2f5c89;
+    padding: 0 5px;
+}
+
+.teacherImg {
+    height: 300px;
+    width: 100%;
+}
+
+.teacher-name {
+    color: #2f5c89;
+    font-size: 18px;
+    padding: 10px 0 0;
+}
+
+.btn-view {
+    border: 2px solid white;
+    border-radius: 0;
+    width: 160px;
+}
+
+.course-info {
+    height: 550px;
+    position: relative;
+    width: 100%;
+}
+
+
+.course-info:hover > .overlay {
+    display: block;
+}
+
+.overlay {
+    background-color: #000;
+    opacity:0.6;
+    bottom: 0;
+    cursor: default;
+    display: none;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    z-index: 50;
+}
+.overlay-title {
+    padding: 80px;
+    color: #fff;
+    font-size: 36px;
+}
+.overlay-key {
+    color: #fff;
+    display: inline-block;
+    float: left;
+    font-family: "Arial","Hiragino Sans GB","Microsoft YaHei",΢���ź�,"Helvetica","sans-serif";
+    text-align: right;
+    width: 50%;
+}
+.overlay-value {
+    color: #fff;
+    text-align: left;
+}
+.col-item {
+    position: relative;
+}
+.courseItem {
+    height: 300px;
+    border: 1px solid #eee;
+    border-top: 10px solid #2f5c89;
+    background-color: #eee;
+    margin: 15px;
+    overflow: hidden;
+    transition:width 2s, height 2s;
+    -moz-transition:width 1s, height 1s, -moz-transform 1s; /* Firefox 4 */
+    -webkit-transition:width 1s, height 1s, -webkit-transform 1s; /* Safari and Chrome */
+    -o-transition:width 1s, height 1s, -o-transform 1s; /* Opera */
+}
+/*.courseItem:hover {
+    cursor: pointer;
+    !*width: 800px;*!
+    position: absolute;
+    z-index: 100;
+    !*overflow: auto;*!
+    border: 1px solid #002f89;
+    border-top: 10px solid #002f89;
+}*/
+.disn {
+    display: none;
+}
+.col-item:hover>.courseItem-overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    background-color: #eee;
+    border: 1px solid #002f89;
+    border-top: 10px solid #002f89;
+    margin: 15px;
+    width: 93%;
+    min-height: 300px;
+    max-height: 650px;
+    overflow: auto;
+}
+
+/*.item-hovered {
+    overflow: auto;
+}
+.hoveredItem {
+    position: absolute;
+    z-index: 50;
+    background: yellow;
+    width: 100%;
+    min-height: 660px;
+    margin: 15px;
+    display: none;
+}*/
+.courseItem-title {
+    font-size: 18px;
+    padding-top: 24px;
+    text-align: center;
+}
+.courseItem-detail {
+    padding: 24px;
+    overflow: hidden;
+}
+

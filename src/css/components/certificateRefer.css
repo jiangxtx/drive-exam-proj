@@ -1,0 +1,11 @@
+.cert-item-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cert .ant-input {
+    width: 400px;
+}
+.cert-item-button {
+    background-color: #025c89;
+}
