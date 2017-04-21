@@ -1,0 +1,224 @@
+body {
+    font-size: 14px;
+}
+h1.garden-title {
+    font-size: 20px;
+    color: #555756;
+    font-family: '微软雅黑';
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.garden-filter {
+    margin: 15px 0;
+}
+.garden-filterItem {
+    display: inline-block;
+    font-size: 14px;
+    padding-right: 8px;
+    margin-bottom: 8px;
+}
+.garden-filterItem-title {
+    margin-right: 6px;
+}
+.garden-filterItem-value {
+    min-width: 120px;
+    width: 70%;
+}
+.garden-main {
+    min-height: 35rem;
+}
+
+.topicItem {
+    border: 1px solid #e0e0e0;
+    padding: 16px 10px 0;
+    margin-bottom: 28px;
+    position: relative;
+}
+.topicItem p {
+    /* line-height: 1.8; */
+    margin: 6px 0;
+}
+.topicItem:hover {
+    box-shadow: 0 0 12px 10px #e3e4e5;
+}
+.topicItem-type {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+.topic-branch-icon {
+    border: 1px solid #000000;
+    border-radius: 50%;
+    background-color: #ffffff;
+    width: 25px;
+    height: 25px;
+    line-height: 23px;
+    display: inline-block;
+    color: #000000;
+    text-align: center;
+}
+.iconRight {
+    border: 1px solid #50B636;
+    background-color: #50B636;
+    color: #ffffff;
+}
+.iconError {
+    border: 1px solid #ff0909;
+    background-color: #ff0909;
+    color: #ffffff;
+}
+
+.topic-branchItem {
+    min-height: 32px;
+    /* line-height: 1.6px; */
+    margin: 5px;
+}
+.topic-branchItem-main {
+    display: inline-block;
+    margin-left: 6px;
+}
+.topicItem-info {
+    padding: 8px;
+    margin: 0 -10px;
+    background-color: #f5f5f5;
+}
+.topicItem-info-key {
+  /* font-weight: 600; */
+  margin-right: 4px;
+  color: #696969;
+}
+.topicItem-info-val {
+    color: #31b7f9;
+    margin-right: 16px;
+}
+.topicItem-info-btn {
+    float: right;
+}
+.topicItem-yourAnswer, .topicItem-rightAnswer {
+    display: block;
+    padding: 0 12px;
+    font-weight: 600;
+}
+.topicItem-rightAnswer {
+    color: #ff0909;
+}
+
+.topicItem-answer-comp {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 12px 0;
+}
+.topicItem-answer-anly {
+    padding: 12px ;
+}
+.topicItem-answer-anlyTitle {
+    color: #31b7f9;
+    font-weight: 600;
+    padding: 0 12px;
+}
+.topicItem-right-kwdgTitle {
+    font-weight: 600;
+    color: #31b7f9;
+}
+.topicItem-right-video .anticon-video-camera {
+    font-size: 48px;
+}
+.topicItem-right-video {
+    margin: 20px 0;
+    float: right;
+    border: 2px solid #ececec;
+    padding: 8px;
+    width: 86px;
+    height: 86px;
+    text-align: center;
+    border-radius: 8%;
+    cursor: pointer;
+    box-shadow: 3px 3px 3px #888888;
+}
+.topicItem-right-video:hover {
+    background-color: #e3e4e5;
+}
+
+.topic-videoItem {
+    padding: 15px;
+    cursor: pointer;
+}
+
+.topicItem-faovr {
+    text-align: right;
+    margin-bottom: 8px;
+}
+.topicItem-favorIcon {
+    color: red;
+}
+.topic-judgeImg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -10;
+}
+.topicItem-left {
+    margin-bottom: 30px;
+}
+.topicItem-right {
+    margin: 20px 0;
+    margin-top: 26px;
+}
+.topicItem-answer-item {
+    margin: 12px 0;
+}
+.topicItem-answer-anlyItem {
+    border-top: 1px solid #f0f0f0;
+    padding: 16px 0;
+}
+.noTopics-tips {
+    /* height: 100%; */
+    min-height: 30rem;
+    line-height: 30rem;
+    text-align: center;
+    font-size: 18px;
+}
+.topic-branch-tiankong p {
+    display: inline-block;
+}
+.topic-branch-tiankong {
+    display: block;
+    margin-bottom: 8px;
+}
+img {
+    vertical-align: middle;
+}
+
+.topicItem-analysis-index {
+    margin: 8px 0;
+    display: inline-block;
+}
+.topicItem-analysis-index + p {
+    display: inline-block;
+}
+
+.video-count {
+    background-color: red;
+    color: #fff;
+    width: 28px;
+    height: 20px;
+    display: inline-block;
+    border-radius: 18%;
+    text-align: center;
+    font-size: 13px;
+}
+.video-js {
+    width: 100%;
+    height: 100%;
+}
+
+.tipicItem-index {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.topicItem-gap {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    border-bottom: 1px solid #3f5c89;
+}
