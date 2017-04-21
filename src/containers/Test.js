@@ -5,6 +5,7 @@ import React ,{Component}from  'react'
 import { Link } from 'react-router'
 import { Menu,Input,Icon,Modal,Form,Radio,notification } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
+import TopicPanel from '../components/TopicPanel'
 
 class Test extends Component {
     constructor(props) {
@@ -19,7 +20,13 @@ class Test extends Component {
 
         return (
             <Row>
-                <h2>测试板块</h2>
+                <Col lg={8}>
+                    <h2>测试板块</h2>
+                </Col>
+                <Col lg={4}>
+                    <h4>答题面板</h4>
+                    <TopicPanel />
+                </Col>
             </Row>
         )
     }
@@ -27,3 +34,4 @@ class Test extends Component {
 
 
 export default Test;
+

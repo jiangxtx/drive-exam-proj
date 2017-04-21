@@ -1,0 +1,14 @@
+.topicPanel-item {
+    display: inline-block;
+    width: 10%;
+    border: 1px solid #2f5c89;
+    margin: 2px;
+    text-align: center;
+    height: 28px;
+    line-height: 28px;
+}
+.topicPanel-item:hover {
+    cursor: pointer;
+    background-color: green;
+    color: #fff;
+}
