@@ -14,7 +14,8 @@ class TopicPanel extends Component {
     }
 
     onItemhandle(index) {
-        alert(`点击了第 ${index} 题`)
+        // alert(`点击了第 ${index} 题`)
+        this.props.onTopicIndexHandle(index)
     }
 
     render() {

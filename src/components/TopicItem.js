@@ -45,53 +45,55 @@ export default class SelectTopic extends Component {
             graspState, studyRecord
         } = this.props.topicInfo || {};
 
-        let { analysis='暂无', content='', type, identifier } = question;
+        let { content='', type, identifier } = question;
         let myTime = answer && answer.time || 0;
         const answerTime = studyRecord && studyRecord.submitTime || '2017-03-13';
 
-        const { correctRate=0, averageTime=0, totalNumber=0 } = questionStatistics || {};
+        const { averageTime=0, totalNumber=0 } = questionStatistics || {};
 
 
-        content = '我是题干部分我是题干部分我是题干部分###我是题干A###我是题干B###我是题干C###我是DDDD';
-        const contentArr = content.split('###');    // 题目主体部分，包括题干与选项
         type='选择题';
+
+
+        const detailInfo = this.props.detailInfo || {};
+        let { optionA, optionB, optionC, optionD, explain,
+            optionType, wrongRate, mediaContent } = detailInfo || {};
+        const contentArr = [optionA, optionB, optionC, optionD];
+        const analysis = explain || '暂无解析';
+        optionType += '';
+
 
         let correctAnswer,
             yourAnswer,
-            itemStemDOM,   // 题干
+            itemStemDOM = detailInfo.question || '题干部分题干部分题干部分？',   // 题干
             itemBranchDOM;  // 题目选项（不同题型 不一样的展示）
-        switch (type) {
-            case '多选题':
-            case '选择题':
-                itemStemDOM = contentArr[0];
-
+        if (mediaContent) {
+            itemStemDOM += `<p><img alt="图片加载中..." class="topicItem-media" src=${mediaContent} /></p>`;
+        }
+        switch (optionType) {
+            case '1':
                 itemBranchDOM = contentArr.map((item, idx) => {
-                    if (idx !== 0) {
-                        return (
-                            <div key={idx} className="topic-branchItem">
-                                <span className="topic-branch-icon">{selectSymbol[idx - 1]}</span>
-                                <span className="topic-branchItem-main"
-                                      dangerouslySetInnerHTML={{__html: contentConvert(contentArr[idx]) }}></span>
-                            </div>
-                        )
-                    } else {
-                        return false;
-                    }
+                    return (
+                        <div key={idx} className="topic-branchItem">
+                            <span className="topic-branch-icon">{selectSymbol[idx]}</span>
+                            <span className="topic-branchItem-main"
+                                  dangerouslySetInnerHTML={{__html: contentConvert(contentArr[idx]) }}></span>
+                        </div>
+                    )
+
                 });
                 correctAnswer = question.answer;
                 yourAnswer = answer.answer;
                 break;
-            case '判断题':
-                itemStemDOM = contentArr[0];
+            case '0':
                 itemBranchDOM = null;
                 correctAnswer = question.answer=='true' ? '正确' : '错误';
                 yourAnswer = answer.answer=='true' ? '正确' : '错误';
                 break;
             default:
-                itemStemDOM = null;
+                itemStemDOM = '题干部分题干部分题干部分？';
                 itemBranchDOM = null;
         }
-        // console.log('DOM:', itemStemDOM, itemBranchDOM)
 
         const { isFetching, isShow, isItemFaovred } = this.state;
 
@@ -145,9 +147,8 @@ export default class SelectTopic extends Component {
                 <Row className="topicItem-info">
                     <span className="topicItem-info-key">答题时间：</span>
                     <span className="topicItem-info-val">{dateFormatUtil(answerTime, true)}</span>
-                    <span className="topicItem-info-key">本题正确率：</span>
-                    <span className="topicItem-info-val">{cutFloat_dot2(correctRate)}%</span>
-                    <span className="topicItem-info-val">{totalNumber}次</span>
+                    <span className="topicItem-info-key">本题错误率：</span>
+                    <span className="topicItem-info-val">{cutFloat_dot2(wrongRate)}%</span>
 
                     <Button className="topicItem-info-btn"
                             type="primary"
