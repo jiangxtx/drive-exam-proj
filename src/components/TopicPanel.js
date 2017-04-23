@@ -21,7 +21,7 @@ class TopicPanel extends Component {
         const panelArr = [];
         for (let i=1; i<101; i++) {
             panelArr.push(
-                <span className="topicPanel-item"
+                <span key={i} className="topicPanel-item"
                       onClick={() => this.onItemhandle(i)}>
                     {i}
                 </span>

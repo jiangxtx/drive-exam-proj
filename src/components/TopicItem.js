@@ -1,7 +1,7 @@
 /**
  * 单选题组件
  */
-import '../css/base.css'
+import '../css/public/public.css'
 import '../css/topicItem.css'
 
 import React,{Component} from 'react'
@@ -18,7 +18,7 @@ export default class SelectTopic extends Component {
     constructor(props) {
         super(props)
         this.state= {
-            isShow: false,
+            isShow: true,
             excsType: 1,
             testType: 1,
             timeObj: {},
@@ -39,20 +39,22 @@ export default class SelectTopic extends Component {
 
     render() {
         const isFavor = this.props.isFavor || false;  // 是否隶属“我的收藏”板块习题
-        const topicIndex = this.props.index;
-        const {
-            questionStatistics={}, answer={}, point={}, question={},
-            graspState, studyRecord, favoriteRecord
+        const topicIndex = this.props.index || 1;
+        let {
+            questionStatistics={}, answer={}, question={},
+            graspState, studyRecord
         } = this.props.topicInfo || {};
 
-        const { analysis='暂无', content='', type, identifier } = question;
-        const kwdgPoint = point && point.name || '';
-        const myTime = answer && answer.time || 0;
-        const answerTime = studyRecord && studyRecord.submitTime || favoriteRecord.createTime;
+        let { analysis='暂无', content='', type, identifier } = question;
+        let myTime = answer && answer.time || 0;
+        const answerTime = studyRecord && studyRecord.submitTime || '2017-03-13';
 
         const { correctRate=0, averageTime=0, totalNumber=0 } = questionStatistics || {};
 
+
+        content = '我是题干部分我是题干部分我是题干部分###我是题干A###我是题干B###我是题干C###我是DDDD';
         const contentArr = content.split('###');    // 题目主体部分，包括题干与选项
+        type='选择题';
 
         let correctAnswer,
             yourAnswer,
@@ -136,36 +138,15 @@ export default class SelectTopic extends Component {
                     </Col>
                     <Col md={6} >
                         <div style={{textAlign: 'right'}} className={ !isFavor ? "topicItem-right": '' }>
-                            { isFavor &&
-                                <div className="topicItem-faovr">
-                                    <Button
-                                        type="default"
-                                        onClick={this.toggleFavor} >
-                                        <Icon type="heart" className={ isItemFaovred ? "topicItem-favorIcon":''} />{ favorBtnTitle }
-                                    </Button>
-                                </div>
-                            }
-
-                            { !!kwdgPoint && (
-                                <div className="topicItem-right-kwdg b_wsol">
-                                    <span className="topicItem-right-kwdgTitle">知识点：</span>
-                                    <span className="" title={kwdgPoint}>{kwdgPoint}</span>
-                                    {/*<span className="" title="图形与几何 > 向量 > 线性运算">图形与几何 > 向量 > 线性运算</span>*/}
-                                </div>
-                            )}
+                            右侧部分
                         </div>
                     </Col>
                 </Row>
                 <Row className="topicItem-info">
                     <span className="topicItem-info-key">答题时间：</span>
                     <span className="topicItem-info-val">{dateFormatUtil(answerTime, true)}</span>
-                    <span className="topicItem-info-key">用时：</span>
-                    <span className="topicItem-info-val">{myTime}秒</span>
                     <span className="topicItem-info-key">本题正确率：</span>
                     <span className="topicItem-info-val">{cutFloat_dot2(correctRate)}%</span>
-                    <span className="topicItem-info-key">平均用时：</span>
-                    <span className="topicItem-info-val">{averageTime}秒</span>
-                    <span className="topicItem-info-key">被做次数：</span>
                     <span className="topicItem-info-val">{totalNumber}次</span>
 
                     <Button className="topicItem-info-btn"
