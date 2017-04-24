@@ -38,9 +38,9 @@ h1.garden-title {
     /* line-height: 1.8; */
     margin: 6px 0;
 }
-.topicItem:hover {
+/*.topicItem:hover {
     box-shadow: 0 0 12px 10px #e3e4e5;
-}
+}*/
 .topicItem-type {
     font-size: 16px;
     font-weight: 600;
@@ -224,4 +224,5 @@ img {
 }
 .topicItem-media {
     max-width: 300px;
+    max-width: 220px;
 }

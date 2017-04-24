@@ -4,6 +4,7 @@
  */
 
 
+
 /**
  * 项目内部相关的常量数据
  */
@@ -15,16 +16,6 @@ const ADMIN_PURE_COURSE = 'type=pure'; // 管理员查看课程学习详情页�
  */
 const PROJ_LICENSE_KEY = '沪ICP备 15038486 号 -3'; // 网站备案/许可证号
 
-//首页临时右侧竖向轮播
-const TEMP_VERTICAL_COURSE = [
-    {
-        "verticalPicUrl":"../img/homepage/3dprint.jpg",
-        "courseId":'fd8f20a7-5c2d-4aa2-9b8d-71541d971037'
-    }, {
-        "verticalPicUrl":"../img/homepage/robot.jpg",
-        "courseId":"3c992ad4-1e0e-4592-b6fe-16ed1c539679"
-    }
-]
 
 // antd 组件中 message 显示的全局配置
 const MESSAGE_CONFIG = {
@@ -98,7 +89,6 @@ const COMMON_FORM_INFO = {
 export {
     COURSE_AUDIT_APPROVE, ADMIN_PURE_COURSE,
     PROJ_LICENSE_KEY,
-    TEMP_VERTICAL_COURSE,
     MESSAGE_CONFIG,
     COMMON_FORM_INFO,
 }

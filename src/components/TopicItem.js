@@ -38,26 +38,13 @@ export default class SelectTopic extends Component {
     }
 
     render() {
-        const isFavor = this.props.isFavor || false;  // 是否隶属“我的收藏”板块习题
-        const topicIndex = this.props.index || 1;
-        let {
-            questionStatistics={}, answer={}, question={},
-            graspState, studyRecord
-        } = this.props.topicInfo || {};
-
-        let { content='', type, identifier } = question;
-        let myTime = answer && answer.time || 0;
-        const answerTime = studyRecord && studyRecord.submitTime || '2017-03-13';
-
-        const { averageTime=0, totalNumber=0 } = questionStatistics || {};
-
-
-        type='选择题';
-
+        const answerTime = '2017-03-13';
 
         const detailInfo = this.props.detailInfo || {};
+        const topicIndex = this.props.index;
+
         let { optionA, optionB, optionC, optionD, explain,
-            optionType, wrongRate, mediaContent } = detailInfo || {};
+            optionType, wrongRate, mediaContent, answer } = detailInfo || {};
         const contentArr = [optionA, optionB, optionC, optionD];
         const analysis = explain || '暂无解析';
         optionType += '';
@@ -82,13 +69,13 @@ export default class SelectTopic extends Component {
                     )
 
                 });
-                correctAnswer = question.answer;
-                yourAnswer = answer.answer;
+                correctAnswer = answer;
+                yourAnswer = answer;
                 break;
             case '0':
                 itemBranchDOM = null;
-                correctAnswer = question.answer=='true' ? '正确' : '错误';
-                yourAnswer = answer.answer=='true' ? '正确' : '错误';
+                correctAnswer = answer=='16' ? '正确' : '错误';
+                yourAnswer = answer=='true' ? '正确' : '错误';
                 break;
             default:
                 itemStemDOM = '题干部分题干部分题干部分？';
@@ -111,10 +98,10 @@ export default class SelectTopic extends Component {
             favorBtnTitle = '收藏';
         }
 
-        const judegIcon = (graspState === 2) ? topicRightIcon : topicErrorIcon;
+        const judegIcon = (2 === 2) ? topicRightIcon : topicErrorIcon;
 
         // 把每题的题号嵌入到题干 string 的内部开头；
-        const item_index = `<strong class="tipicItem-index" title="题号: ${identifier}">${topicIndex}.</strong>`;
+        const item_index = `<strong class="tipicItem-index" title="题号: ${topicIndex}">${topicIndex}.</strong>`;
         if (itemStemDOM.indexOf('<p>') === 0) {
             itemStemDOM = '<p>' + item_index + itemStemDOM.substring(3, itemStemDOM.length)
         } else if (itemStemDOM.indexOf('<div>') === 0) {
@@ -125,7 +112,7 @@ export default class SelectTopic extends Component {
 
         return (
             <div className="topicItem">
-                { !isFavor && <img className="topic-judgeImg" src={judegIcon} alt=""/> }
+                { !false && <img className="topic-judgeImg" src={judegIcon} alt=""/> }
 
                 <Row >
                     <Col md={18}>
@@ -139,9 +126,9 @@ export default class SelectTopic extends Component {
                         </div>
                     </Col>
                     <Col md={6} >
-                        <div style={{textAlign: 'right'}} className={ !isFavor ? "topicItem-right": '' }>
+                        {/*<div style={{textAlign: 'right'}} className={ !isFavor ? "topicItem-right": '' }>
                             右侧部分
-                        </div>
+                        </div>*/}
                     </Col>
                 </Row>
                 <Row className="topicItem-info">
@@ -164,7 +151,7 @@ export default class SelectTopic extends Component {
                                 <span className="topicItem-yourAnswer">您的答案：</span>
                             </Col>
                             <Col md={21}>
-                                <span dangerouslySetInnerHTML={{__html: convertYourAnswer(yourAnswer, type)}}></span>
+                                <span dangerouslySetInnerHTML={{__html: yourAnswer }}></span>
                             </Col>
                         </Row>
                         <Row className="topicItem-answer-item">
@@ -172,7 +159,7 @@ export default class SelectTopic extends Component {
                                 <span className="topicItem-rightAnswer">正确答案：</span>
                             </Col>
                             <Col md={21}>
-                                <span dangerouslySetInnerHTML={{__html: contentConvert(correctAnswer)}}></span>
+                                <span dangerouslySetInnerHTML={{__html: correctAnswer }}></span>
                             </Col>
                         </Row>
                         <Row className="topicItem-answer-anlyItem">
@@ -180,7 +167,7 @@ export default class SelectTopic extends Component {
                                 <span className="topicItem-answer-anlyTitle">答案解析：</span>
                             </Col>
                             <Col md={21}>
-                                <span dangerouslySetInnerHTML={{__html: convertAnalysis(analysis)}}></span>
+                                <span dangerouslySetInnerHTML={{__html: analysis }}></span>
                             </Col>
                         </Row>
                     </Col>

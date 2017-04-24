@@ -57,7 +57,7 @@ module.exports = {
           'node_modules'
         ]
     },
-    /*devServer: {
+    devServer: {
         hot: true,
         inline: true,
         progress: true,
@@ -73,7 +73,7 @@ module.exports = {
             }
           }
         }
-    },*/
+    },
     plugins: [
         //代码压缩(webpack内建插件webPack.optimize.UglifyJsPlugin)
         new webpack.optimize.UglifyJsPlugin({

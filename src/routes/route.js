@@ -12,12 +12,14 @@ import IndexFooter from '../components/index_footer'
 import ListContainer from '../containers/home/ListContainer'
 import NewsList from '../containers/home/NewsList'
 import StudyList from '../containers/home/StudyList'
+
 import ExcsList from '../containers/home/ExcsList'
 import NewsDetail from '../containers/home/NewsDetail'
 import StudyDetail from '../containers/home/StudyDetail'
 import ExcsDetail from '../containers/home/ExcsDetail'
 
 import Candidate from '../containers/Candidate'
+import OrderExercise from '../containers/OrderExercise'
 import Exercise from '../containers/Exercise'
 import Test from '../containers/Test'
 
@@ -47,6 +49,7 @@ const HomeRoute = (
 
             <Route path="candidate" component={Candidate} >
                 <IndexRoute component={Exercise} />
+                <Route path="order" component={OrderExercise} />
                 <Route path="excs" component={Exercise} />
                 <Route path="test" component={Test} />
                 {/*
