@@ -5,10 +5,12 @@ import '../css/public/public.css'
 import '../css/topicItem.css'
 
 import React,{Component} from 'react'
-import { Form, Input, Modal,Button, DatePicker, Icon,Select, Badge, Spin, Row, Col } from 'antd';
+import { Form, Input, Modal,Button, DatePicker, Icon, Radio, Spin, Row, Col } from 'antd';
 import { dateFormatUtil } from '../Tool/date-time.tool'
 import { cutFloat_dot2 } from '../Tool/number.tool'
 import { contentConvert, convertKeySteps, convertYourAnswer, convertAnalysis, convertGapUnderline } from '../Tool/topicContentAnalysis'
+
+const RadioGroup = Radio.Group;
 
 const selectSymbol = ['A', 'B','C', 'D', 'E', 'F','G', 'H', 'I'];  // 选择题题目选项的标识符
 const topicRightIcon = require('../img/user/topic-right.jpg')
@@ -18,20 +20,25 @@ export default class SelectTopic extends Component {
     constructor(props) {
         super(props)
         this.state= {
+            isFetching: false,
             isShow: true,
-            excsType: 1,
-            testType: 1,
-            timeObj: {},
-            isVideoModalVisible: false,
             isItemFaovred: true, // 该题目是否被收藏
+            answer: '',
         }
 
         this.toggleAnswerPart = this.toggleAnswerPart.bind(this)
+        this.onChange = this.onChange.bind(this)
     }
     toggleAnswerPart() {
         this.setState({
             isShow: !this.state.isShow,
         })
+    }
+
+    onChange(e) {
+        this.setState({
+            answer: e.target.value,
+        });
     }
 
     componentDidMount() {
@@ -43,11 +50,13 @@ export default class SelectTopic extends Component {
         const detailInfo = this.props.detailInfo || {};
         const topicIndex = this.props.index;
 
-        let { optionA, optionB, optionC, optionD, explain,
-            optionType, wrongRate, mediaContent, answer } = detailInfo || {};
+        let {
+            optionA, optionB, optionC, optionD, explain,
+            optionType, wrongRate, mediaContent, answer
+        } = detailInfo || {};
         const contentArr = [optionA, optionB, optionC, optionD];
         const analysis = explain || '暂无解析';
-        optionType += '';
+        optionType = ~~optionType;
 
 
         let correctAnswer,
@@ -58,7 +67,7 @@ export default class SelectTopic extends Component {
             itemStemDOM += `<p><img alt="图片加载中..." class="topicItem-media" src=${mediaContent} /></p>`;
         }
         switch (optionType) {
-            case '1':
+            case 1:
                 itemBranchDOM = contentArr.map((item, idx) => {
                     return (
                         <div key={idx} className="topic-branchItem">
@@ -72,7 +81,7 @@ export default class SelectTopic extends Component {
                 correctAnswer = answer;
                 yourAnswer = answer;
                 break;
-            case '0':
+            case 0:
                 itemBranchDOM = null;
                 correctAnswer = answer=='16' ? '正确' : '错误';
                 yourAnswer = answer=='true' ? '正确' : '错误';
@@ -124,6 +133,26 @@ export default class SelectTopic extends Component {
                                 { itemBranchDOM }
                             </div>
                         </div>
+
+                        <div className="answerItem">
+                            <span className="answer-title">您的答案：</span>
+                            <span>
+                                { optionType === 1 ?
+                                    <RadioGroup onChange={this.onChange} value={this.state.answer}>
+                                        <Radio value='1'>A</Radio>
+                                        <Radio value='2'>B</Radio>
+                                        <Radio value='3'>C</Radio>
+                                        <Radio value='4'>D</Radio>
+                                    </RadioGroup> :
+                                    <RadioGroup onChange={this.onChange} value={this.state.answer}>
+                                        <Radio value='1'>正确</Radio>
+                                        <Radio value='2'>错误</Radio>
+                                    </RadioGroup>
+                                }
+                            </span>
+                        </div>
+
+
                     </Col>
                     <Col md={6} >
                         {/*<div style={{textAlign: 'right'}} className={ !isFavor ? "topicItem-right": '' }>
@@ -131,11 +160,22 @@ export default class SelectTopic extends Component {
                         </div>*/}
                     </Col>
                 </Row>
+                <Row>
+                    <Button type="primary"
+                            icon={btnIconType} >
+                        上一题
+                    </Button>
+                    <Button type="primary"
+                            icon={btnIconType} >
+                        下一题
+                    </Button>
+                </Row>
                 <Row className="topicItem-info">
-                    <span className="topicItem-info-key">答题时间：</span>
-                    <span className="topicItem-info-val">{dateFormatUtil(answerTime, true)}</span>
-                    <span className="topicItem-info-key">本题错误率：</span>
-                    <span className="topicItem-info-val">{cutFloat_dot2(wrongRate)}%</span>
+
+                        <span className="topicItem-info-key">答题时间：</span>
+                        <span className="topicItem-info-val">{dateFormatUtil(answerTime, true)}</span>
+                        <span className="topicItem-info-key">本题错误率：</span>
+                        <span className="topicItem-info-val">{cutFloat_dot2(wrongRate)}%</span>
 
                     <Button className="topicItem-info-btn"
                             type="primary"

@@ -157,7 +157,7 @@ h1.garden-title {
     z-index: -10;
 }
 .topicItem-left {
-    margin-bottom: 30px;
+    margin-bottom: 12px;
 }
 .topicItem-right {
     margin: 20px 0;
@@ -225,4 +225,12 @@ img {
 .topicItem-media {
     max-width: 300px;
     max-width: 220px;
+}
+
+.answerItem {
+    font-size: 14px !important;
+    margin-bottom: 18px;
+}
+.ant-radio-wrapper {
+    font-size: 14px;
 }
