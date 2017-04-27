@@ -3,6 +3,8 @@ var router = express.Router();
 
 var user = require('../database/db').user;
 
+// var { custom_fetch } = require('../src/Tool/wrap.fetch');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'express-mongoDB Guide' });
@@ -74,6 +76,30 @@ router.get('/products/:id', function (req, res, next) {
         res.json(products[id]);
     }
 });
+
+
+/************************** 获取“驾考宝典”试题 BEGIN ********************************/
+
+/*  */
+router.get('/queryTopicIds', function (req, res, next) {
+    console.log('queryUsqueryTopicIdsers entering...');
+
+    const url = `http://api2.jiakaobaodian.com/api/open/exercise/sequence.htm?_r=13721661427365837087&carType=car&course=kemu1&cityCode=310000`;
+
+    fetch(url)
+        .then()
+
+    /*custom_fetch.get(url, json => {
+        if (json.success) {
+            res.json(json.data)
+        } else {
+            res.statusCode = 404;
+            return res.send('Error 404: No queryTopicIds found')
+        }
+    })*/
+})
+
+/************************** 获取“驾考宝典”试题 END ********************************/
 
 
 module.exports = router;
