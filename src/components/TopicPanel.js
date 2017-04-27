@@ -19,18 +19,23 @@ class TopicPanel extends Component {
     }
 
     render() {
+        let { totalNum, currentIndex } = this.props;
+        totalNum = totalNum || 100;
+        currentIndex = currentIndex || -1;
+
         const panelArr = [];
-        for (let i=1; i<101; i++) {
+        for (let i=0; i<totalNum; i++) {
             panelArr.push(
-                <span key={i} className="topicPanel-item"
+                <span key={i} className={`topicPanel-item ${currentIndex === i ? 'active' : ''}`}
                       onClick={() => this.onItemhandle(i)}>
-                    {i}
+                    {i + 1}
                 </span>
             )
         }
 
         return (
-            <div>
+            <div >
+            {/*<div style={{maxHeight: '550px', overflow: 'auto', margin: '26px', border: '1px solid #2f5c89'}}>*/}
                 { panelArr }
             </div>
         )

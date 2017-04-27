@@ -1,6 +1,6 @@
 .topicPanel-item {
     display: inline-block;
-    width: 10%;
+    width: 38px;
     border: 1px solid #2f5c89;
     margin: 2px;
     text-align: center;
@@ -11,4 +11,16 @@
     cursor: pointer;
     background-color: green;
     color: #fff;
+}
+.topicPanel-item.active {
+    background-color: #2f5c89;
+    color: #fff;
+}
+
+.topicPanel {
+    max-height: 250px;
+    overflow: auto;
+    max-width: 870px;
+    border: 2px solid #2f5c89;
+    padding: 2px;
 }

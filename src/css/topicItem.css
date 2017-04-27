@@ -31,6 +31,8 @@ h1.garden-title {
 .topicItem {
     border: 1px solid #e0e0e0;
     padding: 16px 10px 0;
+    margin: 26px;
+    margin-left: 0;
     margin-bottom: 28px;
     position: relative;
 }

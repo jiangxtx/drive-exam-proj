@@ -3,8 +3,9 @@ import '../css/candidate.css'
 
 import React ,{Component}from  'react'
 import { Link } from 'react-router'
-import { Menu,Input,Select, Icon,Modal,Form,Radio,notification } from 'antd'
+import { Menu,Input,Select, Icon,Modal,Form,Spin, notification } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
+import TopicPanel from '../components/TopicPanel'
 import TopicItem from '../components/TopicItem'
 import { custom_fetch } from '../Tool/wrap.fetch'
 import { queryTopicDetailsByIds } from '../Tool/drive-exam-func.tool'
@@ -18,9 +19,12 @@ class OrderExercise extends Component {
             isFetching: true,
             topicInfo: {},
             selectedIndex: 0,
+            answerState: '0', // 0: 答题状态，1: 查看解答；
         };
 
         this.queryOrderExerciseIds = this.queryOrderExerciseIds.bind(this)
+        this.onLastOrNextTopic = this.onLastOrNextTopic.bind(this)
+        this.onTopicIndexHandle = this.onTopicIndexHandle.bind(this)
     }
 
     queryOrderExerciseIds() {
@@ -30,6 +34,7 @@ class OrderExercise extends Component {
             const idsArr = data.data || [];
             queryTopicDetailsByIds(idsArr[0], (detail) => {
                 this.setState({
+                    isFetching: false,
                     idsArr: data.data || [],
                     topicInfo: detail
                 })
@@ -37,20 +42,72 @@ class OrderExercise extends Component {
         })
     }
 
+    onTopicIndexHandle(index) {
+        this.onLastOrNextTopic(index)
+    }
+
+    onLastOrNextTopic(index) {
+        const idsArr = this.state.idsArr || [];
+        if (index < 0) {
+            notification.error({
+                message: '友情提醒',
+                description: '已经是第一题了！'
+            });
+            return false;
+        } else if (index > idsArr.length - 1) {
+            notification.error({
+                message: '友情提醒',
+                description: '已经是最后一题了！'
+            });
+            return false;
+        }
+        this.setState({
+            isFetching: true,
+        })
+        const targetId = this.state.idsArr[index];
+        console.log('next Topic index:', index, targetId)
+
+        queryTopicDetailsByIds(targetId, (detail) => {
+            this.setState({
+                isFetching: false,
+                topicInfo: detail,
+                selectedIndex: index,
+            })
+        })
+    }
+
+
     componentDidMount() {
         this.queryOrderExerciseIds();
     }
 
     render() {
-        const { topicInfo, selectedIndex, isFetching } = this.state;
+        const { topicInfo, selectedIndex, isFetching, idsArr } = this.state;
         const detailInfo = topicInfo && topicInfo[0] || {};
+        const totalNum = idsArr && idsArr.length || 0;
 
+        // console.log('OrderExercise render seledIndex: ', selectedIndex)
         return (
             <Row>
-                <h2>模拟考试 > 科目一 > 顺序练习</h2>
+                <Spin spinning={isFetching}>
+                    <h2>模拟考试 > 科目一 > 顺序练习</h2>
 
-                <TopicItem index={selectedIndex} detailInfo={detailInfo} />
+                    <TopicItem
+                        key={selectedIndex}
+                        index={selectedIndex}
+                        detailInfo={detailInfo}
+                        state={this.state.answerState}
+                        onLastOrNextTopic={this.onLastOrNextTopic}
+                    />
 
+                    <h4>答题卡</h4>
+                    <div className="topicPanel">
+                        <TopicPanel totalNum={totalNum}
+                                    currentIndex={selectedIndex}
+                                    onTopicIndexHandle={this.onTopicIndexHandle} />
+                    </div>
+
+                </Spin>
             </Row>
         )
     }

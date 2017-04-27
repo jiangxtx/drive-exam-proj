@@ -21,9 +21,10 @@ export default class SelectTopic extends Component {
         super(props)
         this.state= {
             isFetching: false,
-            isShow: true,
+            isShow: false,
             isItemFaovred: true, // 该题目是否被收藏
             answer: '',
+            // answerState: '0', // 0: 答题状态，1: 查看解答；
         }
 
         this.toggleAnswerPart = this.toggleAnswerPart.bind(this)
@@ -36,8 +37,13 @@ export default class SelectTopic extends Component {
     }
 
     onChange(e) {
+        console.log('Your answer is : ' + e.target.value)
         this.setState({
             answer: e.target.value,
+            answerState: '1',
+        }, () => {
+            // this.props.
+
         });
     }
 
@@ -49,6 +55,7 @@ export default class SelectTopic extends Component {
 
         const detailInfo = this.props.detailInfo || {};
         const topicIndex = this.props.index;
+        const answerState = this.props.answerState || '0';
 
         let {
             optionA, optionB, optionC, optionD, explain,
@@ -110,7 +117,7 @@ export default class SelectTopic extends Component {
         const judegIcon = (2 === 2) ? topicRightIcon : topicErrorIcon;
 
         // 把每题的题号嵌入到题干 string 的内部开头；
-        const item_index = `<strong class="tipicItem-index" title="题号: ${topicIndex}">${topicIndex}.</strong>`;
+        const item_index = `<strong class="tipicItem-index" title="题号: ${topicIndex + 1}">${topicIndex + 1}.</strong>`;
         if (itemStemDOM.indexOf('<p>') === 0) {
             itemStemDOM = '<p>' + item_index + itemStemDOM.substring(3, itemStemDOM.length)
         } else if (itemStemDOM.indexOf('<div>') === 0) {
@@ -118,17 +125,17 @@ export default class SelectTopic extends Component {
         } else {
             itemStemDOM = item_index + itemStemDOM;
         }
+// console.log('topicItem index: ', topicIndex)
 
         return (
             <div className="topicItem">
-                { !false && <img className="topic-judgeImg" src={judegIcon} alt=""/> }
+                { (answerState === '1') && <img className="topic-judgeImg" src={judegIcon} alt=""/> }
 
                 <Row >
                     <Col md={18}>
                         <div className="topicItem-left">
-                            {/*<p className="topicItem-type">题 {topicIndex}：{type}</p>*/}
                             <p className="topicItem-stem"
-                               dangerouslySetInnerHTML={{__html: contentConvert(itemStemDOM) }} ></p>
+                               dangerouslySetInnerHTML={{__html: contentConvert(itemStemDOM) }} />
                             <div className="topic-branch">
                                 { itemBranchDOM }
                             </div>
@@ -161,29 +168,30 @@ export default class SelectTopic extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Button type="primary"
-                            icon={btnIconType} >
+                    <Button type="primary" icon={btnIconType}
+                            onClick={() => this.props.onLastOrNextTopic(~~topicIndex - 1)}>
                         上一题
                     </Button>
-                    <Button type="primary"
-                            icon={btnIconType} >
+                    <Button type="primary" icon={btnIconType}
+                            onClick={() => this.props.onLastOrNextTopic(~~topicIndex + 1)} >
                         下一题
                     </Button>
                 </Row>
-                <Row className="topicItem-info">
-
+                { (answerState === '1') &&
+                    <Row className="topicItem-info">
                         <span className="topicItem-info-key">答题时间：</span>
                         <span className="topicItem-info-val">{dateFormatUtil(answerTime, true)}</span>
                         <span className="topicItem-info-key">本题错误率：</span>
                         <span className="topicItem-info-val">{cutFloat_dot2(wrongRate)}%</span>
 
-                    <Button className="topicItem-info-btn"
-                            type="primary"
-                            icon={btnIconType}
-                            onClick={this.toggleAnswerPart} >
-                        { btnTitle }
-                    </Button>
-                </Row>
+                        <Button className="topicItem-info-btn"
+                                type="primary"
+                                icon={btnIconType}
+                                onClick={this.toggleAnswerPart} >
+                            { btnTitle }
+                        </Button>
+                    </Row>
+                }
                 <Row className="topicItem-answer" style={{display: displayVal}}>
                     <Col>
                         <Row className="topicItem-answer-item">

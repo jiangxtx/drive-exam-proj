@@ -78,13 +78,17 @@ class Test extends Component {
                 <Row>
                     <Col lg={8}>
                         <h2>考试模拟</h2>
-                        <TopicItem index={selectedIndex} detailInfo={detailInfo} />
+                        <TopicItem
+                            key={selectedIndex}
+                            index={selectedIndex}
+                            detailInfo={detailInfo} />
                     </Col>
                     <Col lg={4}>
                         <h4>剩余时间</h4>
                         45:00
                         <h4>答题面板</h4>
-                        <TopicPanel onTopicIndexHandle={this.onTopicIndexHandle} />
+                        <TopicPanel totalNum={100}
+                                    onTopicIndexHandle={this.onTopicIndexHandle} />
                     </Col>
                 </Row>
             </Spin>
