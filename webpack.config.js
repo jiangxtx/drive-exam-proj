@@ -6,7 +6,6 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: {
         'index'     : path.join(__dirname,'public/index.js'),
-        // 'manage'    : path.join(__dirname,'public/manage.js'),
         //'vendor'    : vendorArr,
     },
     output: {
