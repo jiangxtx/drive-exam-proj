@@ -16,7 +16,8 @@ dbconnect.on('open', function (callback) {
 // define a new model, but not related to 'users';
 const userSchema = new Schema({
     name: String,
-    password: String
+    password: String,
+    email: String
 });
 
-exports.user = db.model('users', userSchema); // relate to 'users'
+exports.UserModel = db.model('users', userSchema); // relate to 'users'

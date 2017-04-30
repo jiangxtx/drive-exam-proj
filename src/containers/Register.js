@@ -4,6 +4,8 @@ import { Card, Form, Icon, Input, Button, Checkbox } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 import { drawNetCanvas } from '../Tool/drawNetCanvas'
 import RegisterSuccessFrom from './RegisterSuccessForm'
+import { custom_fetch } from '../Tool/wrap.fetch'
+
 import '../css/home/login.css'
 
 const FormItem = Form.Item;
@@ -66,6 +68,13 @@ class Register extends Component {
 
     handleRegisterSubmit(data) {
         console.log('handleRegisterSubmit: ', data)
+
+        const regstUrl = 'http://127.0.0.1:3000/drive-regst';
+        custom_fetch.post(regstUrl, data, json => {
+            alert(json.msg)
+
+        })
+
         this.setState({
             registerSuccess: true,
         })

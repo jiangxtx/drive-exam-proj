@@ -22,7 +22,7 @@ const headers = {
     'Accept': 'application/json, text/javascript,*/*'
 };
 // 'include' is to send cookies in a cross-origin resource sharing request,'same-origin' is the opposite
-const credentials = 'same-origin';
+const credentials = 'include';
 
 /**
  * 依据 fetchAjax 的类型返回请求对象。
@@ -104,6 +104,7 @@ export const custom_fetch = {
 var FETCH_HEAD =  {
     //body:paydata,
     credentials,    // 'include' is to send cookies in a cross-origin resource sharing request,'same-origin' is the opposite
+    mode: 'no-cors',
     headers:{
         'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8',
         'Accept': 'application/json, text/javascript,*/*'

@@ -13,8 +13,8 @@ import { contentConvert, convertKeySteps, convertYourAnswer, convertAnalysis, co
 const RadioGroup = Radio.Group;
 
 const selectSymbol = ['A', 'B','C', 'D', 'E', 'F','G', 'H', 'I'];  // 选择题题目选项的标识符
-const topicRightIcon = require('../img/user/topic-right.jpg')
-const topicErrorIcon = require('../img/user/topic-error.jpg')
+const topicRightIcon = require('../img/topic-right.jpg')
+const topicErrorIcon = require('../img/topic-error.jpg')
 
 export default class SelectTopic extends Component {
     constructor(props) {
