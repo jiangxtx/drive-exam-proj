@@ -5,8 +5,10 @@ import React ,{Component}from  'react'
 import { Link } from 'react-router'
 import {bindActionCreators} from  'redux'
 import {connect} from 'react-redux'
-import { Menu,Input,Icon,Modal,Form,Radio,notification} from 'antd'
+import { Menu,Button,Icon,Modal,Form,Radio,notification} from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../../layout'
+
+
 
 class Head extends Component {
     constructor(props) {

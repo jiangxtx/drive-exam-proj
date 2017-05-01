@@ -86,9 +86,19 @@ const COMMON_FORM_INFO = {
     },
 };
 
+const Url_base = `http://api2.jiakaobaodian.com/api/open`;
+const Url_param = `_r=13721661427365837087&cityCode=310000&page=1&limit=25&course=kemu1&carType=car&_=0.7845020336057755`;
+const Url = {
+    allTopicIdsList: `${Url_base}/exercise/sequence.htm?${Url_param}`,
+    topicInfoByIds: `${Url_base}/question/question-list.htm?${Url_param}&`,
+    chapterInfoByid: `${Url_base}/exercise/chapter.htm?${Url_param}&`,
+
+}
+
 export {
     COURSE_AUDIT_APPROVE, ADMIN_PURE_COURSE,
     PROJ_LICENSE_KEY,
     MESSAGE_CONFIG,
     COMMON_FORM_INFO,
+    Url,
 }

@@ -2,9 +2,13 @@ var express = require('express');
 var router = express.Router();
 
 var UserModel = require('../database/db').UserModel;
+var TopicModel = require('../database/db').TopicModel;
+var ChapterModel = require('../database/db').ChapterModel;
+
+router.post('/saveDriveDatas', function (req, res, next) {
 
 
-/************************** 获取“驾考宝典”试题 BEGIN ********************************/
+})
 
 const products = [
     { name: 'apple juice', description: 'good', price: 12.12 },
@@ -39,6 +43,40 @@ router.post('/drive-regst', function (req, res, next) {
     });
 
 });
+
+// 把习题写入数据库
+router.post('/drive-dataImport', function (req, res, next) {
+    const data = req.body;
+
+    const topicEntity = new TopicModel({
+        questionId: data.questionId,
+        innerId: data.innerId,
+        detail: data.topicData
+    });
+
+    topicEntity.save();
+
+    res.json({
+        success: true,
+        msg: '写入数据成功',
+        questionId: data.questionId
+    });
+})
+
+// 把章节信息写入数据库
+router.post('/drive-chapterImport', function (req, res, next) {
+    const data = req.body;
+
+    const entity = new ChapterModel(data);
+
+    entity.save();
+
+    res.json({
+        success: true,
+        msg: '写入数据成功',
+        questionId: data.questionId
+    });
+})
 
 
 

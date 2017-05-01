@@ -20,4 +20,28 @@ const userSchema = new Schema({
     email: String
 });
 
+
+const topicSchema = new Schema({
+    questionId: Number,
+    innerId: Number,
+    detail: String
+});
+
+// 各个部分所拥有的的习题ID数组表
+const ownidSchema = new Schema({
+    key: String,
+    value: String,
+    ids: String
+})
+
+const chapterSchema = new Schema({
+    id: Number,
+    key: String,
+    name: String,
+    count: Number,
+    ids: String
+})
+
 exports.UserModel = db.model('users', userSchema); // relate to 'users'
+exports.TopicModel = db.model('topics', topicSchema); // relate to 'topics'
+exports.ChapterModel = db.model('chapters', chapterSchema); // relate to 'topics'

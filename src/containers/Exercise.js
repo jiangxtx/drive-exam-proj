@@ -6,6 +6,7 @@ import { Link } from 'react-router'
 import { Menu,Input,Select, Icon,Modal,Form,Radio,notification } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 
+
 class Exercise extends Component {
     constructor(props) {
         super(props);

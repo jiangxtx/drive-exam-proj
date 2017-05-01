@@ -94,26 +94,28 @@ function arrToFetchData(senddataArr) {
 
 
 export const custom_fetch = {
-    post:function(url,data,callback){
-        fetch_function('post',url,callback,data)
+    post:function(url,data,callback, cors){
+        fetch_function('post',url,callback,data, cors)
     },
-    get:function (url,callback) {
-        fetch_function('get',url,callback, {})
+    get:function (url,callback, cors) {
+        fetch_function('get',url,callback, {}, cors)
     }
 }
 var FETCH_HEAD =  {
     //body:paydata,
     credentials,    // 'include' is to send cookies in a cross-origin resource sharing request,'same-origin' is the opposite
-    mode: 'no-cors',
+    // mode: 'no-cors',
     headers:{
         'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8',
         'Accept': 'application/json, text/javascript,*/*'
     }
 };
-const fetch_function = function (type,url,callback,data={}) {
+const fetch_function = function (type,url,callback,data={}, cors) {
     //console.log('query',query123)
-    let tempdata = FETCH_HEAD
-    tempdata.method = type
+    let tempdata = FETCH_HEAD;
+    tempdata.method = type;
+    tempdata.mode = (cors!==false) ? 'cors' : 'no-cors';
+
     if(type === 'post'){
         let tempQuery = queryString.stringify(data)
         tempdata.body = tempQuery
