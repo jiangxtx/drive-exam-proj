@@ -9,7 +9,7 @@ import IndexHead from '../containers/home/Header'
 
 import Candidate from '../containers/Candidate'
 import OrderExercise from '../containers/OrderExercise'
-import Exercise from '../containers/Exercise'
+import ChapterExercise from '../containers/ChapterExercise'
 import Test from '../containers/Test'
 
 import Admin from '../containers/Admin'
@@ -37,7 +37,7 @@ const HomeRoute = (
             <Route path="candidate" component={Candidate} >
                 <IndexRoute component={OrderExercise} />
                 <Route path="order" component={OrderExercise} />
-                <Route path="excs" component={Exercise} />
+                <Route path="excs" component={ChapterExercise} />
                 <Route path="test" component={Test} />
                 {/*
                 <Route path="exam" component={Exam} />

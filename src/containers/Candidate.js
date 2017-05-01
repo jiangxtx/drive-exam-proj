@@ -29,9 +29,8 @@ class Main extends Component {
     render() {
         const leftNavList = [
             { title: '顺序练习', link: '/candidate/order' },
-            { title: '练习模式', link: '/candidate/excs' },
-            { title: '测验模式', link: '/candidate/test' },
-            { title: '考试模式', link: '/candidate/editE' },
+            { title: '章节练习', link: '/candidate/excs' },
+            { title: '模拟考试', link: '/candidate/test' },
             { title: '我的错题', link: '/candidate/editE' },
             { title: '我的收藏', link: '/home/editE' },
             { title: '我的统计', link: '/home/editE' },

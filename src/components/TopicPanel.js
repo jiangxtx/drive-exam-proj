@@ -34,9 +34,11 @@ class TopicPanel extends Component {
         }
 
         return (
-            <div >
-            {/*<div style={{maxHeight: '550px', overflow: 'auto', margin: '26px', border: '1px solid #2f5c89'}}>*/}
-                { panelArr }
+            <div className="topicPanel-wrap">
+                <h4>答题卡</h4>
+                <div className="topicPanel">
+                    { panelArr }
+                </div>
             </div>
         )
     }

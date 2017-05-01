@@ -33,13 +33,13 @@ class Head extends Component {
             <div className="headTop">
                 <Container>
                     <Row>
-                        <Col lg={8}>
+                        <Col sm={8}>
                             <div className="headLogo">
                                 <h1 className="headLogo-title">
                                     <Link to="/">考试系统平台</Link></h1>
                             </div>
                         </Col>
-                        <Col lg={4}>
+                        <Col sm={4}>
                             <div className="headLogin">
                                 <Link activeClassName="link-active" to="register">注册</Link>
                                 <span style={{marginLeft:"5px",marginRight:"5px"}}>|</span>

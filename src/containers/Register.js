@@ -72,6 +72,7 @@ class Register extends Component {
         const regstUrl = 'http://127.0.0.1:3000/drive-regst';
         custom_fetch.post(regstUrl, data, json => {
             alert(json.msg)
+            console.log('login data:' , json)
 
         })
 

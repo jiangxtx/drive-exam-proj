@@ -103,7 +103,7 @@ export const custom_fetch = {
 }
 var FETCH_HEAD =  {
     //body:paydata,
-    credentials,    // 'include' is to send cookies in a cross-origin resource sharing request,'same-origin' is the opposite
+    // credentials,    // 'include' is to send cookies in a cross-origin resource sharing request,'same-origin' is the opposite
     // mode: 'no-cors',
     headers:{
         'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8',
@@ -114,7 +114,8 @@ const fetch_function = function (type,url,callback,data={}, cors) {
     //console.log('query',query123)
     let tempdata = FETCH_HEAD;
     tempdata.method = type;
-    tempdata.mode = (cors!==false) ? 'cors' : 'no-cors';
+    // tempdata.mode = (cors!==false) ? 'cors' : 'no-cors';
+    tempdata.mode = 'cors';
 
     if(type === 'post'){
         let tempQuery = queryString.stringify(data)
@@ -122,6 +123,8 @@ const fetch_function = function (type,url,callback,data={}, cors) {
 
     }
     window.fetch(FETCH_URL+url,tempdata).then(res=>{
+        console.log('fetch>>>')
+
         if((res.status >= 200 && res.status < 300)|| res.ok){
             res.json().then(result=>{
                 callback(result)

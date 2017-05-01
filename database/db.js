@@ -15,6 +15,7 @@ dbconnect.on('open', function (callback) {
 
 // define a new model, but not related to 'users';
 const userSchema = new Schema({
+    id: Number,
     name: String,
     password: String,
     email: String
@@ -42,6 +43,15 @@ const chapterSchema = new Schema({
     ids: String
 })
 
+// 用户做题记录表
+const recordSchema = new Schema({
+    userId: Number,
+    doneIds: String,
+    errorIds: String,
+    favorIds: String
+});
+
 exports.UserModel = db.model('users', userSchema); // relate to 'users'
 exports.TopicModel = db.model('topics', topicSchema); // relate to 'topics'
 exports.ChapterModel = db.model('chapters', chapterSchema); // relate to 'topics'
+exports.RecordModel = db.model('records', recordSchema); // relate to 'records'

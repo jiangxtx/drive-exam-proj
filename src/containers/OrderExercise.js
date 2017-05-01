@@ -10,6 +10,8 @@ import TopicItem from '../components/TopicItem'
 import { custom_fetch } from '../Tool/wrap.fetch'
 import { queryTopicDetailsByIds } from '../Tool/drive-exam-func.tool'
 
+import ExerciseMainpart from './ExerciseMainpart'
+
 class OrderExercise extends Component {
     constructor(props) {
         super(props);
@@ -23,8 +25,6 @@ class OrderExercise extends Component {
         };
 
         this.queryOrderExerciseIds = this.queryOrderExerciseIds.bind(this)
-        this.onLastOrNextTopic = this.onLastOrNextTopic.bind(this)
-        this.onTopicIndexHandle = this.onTopicIndexHandle.bind(this)
     }
 
     queryOrderExerciseIds() {
@@ -32,83 +32,29 @@ class OrderExercise extends Component {
             `&cityCode=310000&page=1&limit=25&course=kemu1&carType=car&_=0.7845020336057755`;
         custom_fetch.get(url, data => {
             const idsArr = data.data || [];
-            queryTopicDetailsByIds(idsArr[0], (detail) => {
-                this.setState({
-                    isFetching: false,
-                    idsArr: data.data || [],
-                    topicInfo: detail
-                })
-            })
-        })
-    }
-
-    onTopicIndexHandle(index) {
-        this.onLastOrNextTopic(index)
-    }
-
-    onLastOrNextTopic(index) {
-        const idsArr = this.state.idsArr || [];
-        if (index < 0) {
-            notification.error({
-                message: '友情提醒',
-                description: '已经是第一题了！'
-            });
-            return false;
-        } else if (index > idsArr.length - 1) {
-            notification.error({
-                message: '友情提醒',
-                description: '已经是最后一题了！'
-            });
-            return false;
-        }
-        this.setState({
-            isFetching: true,
-        })
-        const targetId = this.state.idsArr[index];
-        console.log('next Topic index:', index, targetId)
-
-        queryTopicDetailsByIds(targetId, (detail) => {
             this.setState({
                 isFetching: false,
-                topicInfo: detail,
-                selectedIndex: index,
+                idsArr: data.data || [],
             })
         })
     }
-
 
     componentDidMount() {
         this.queryOrderExerciseIds();
     }
 
     render() {
-        const { topicInfo, selectedIndex, isFetching, idsArr } = this.state;
-        const detailInfo = topicInfo && topicInfo[0] || {};
-        const totalNum = idsArr && idsArr.length || 0;
-
+        const { isFetching, idsArr } = this.state;
         // console.log('OrderExercise render seledIndex: ', selectedIndex)
         return (
-            <Row>
-                <Spin spinning={isFetching}>
-                    <h2>模拟考试 > 科目一 > 顺序练习</h2>
+            <Spin spinning={isFetching}>
 
-                    <TopicItem
-                        key={selectedIndex}
-                        index={selectedIndex}
-                        detailInfo={detailInfo}
-                        state={this.state.answerState}
-                        onLastOrNextTopic={this.onLastOrNextTopic}
-                    />
+                <h2>模拟考试 > 科目一 > 顺序练习</h2>
 
-                    <h4>答题卡</h4>
-                    <div className="topicPanel">
-                        <TopicPanel totalNum={totalNum}
-                                    currentIndex={selectedIndex}
-                                    onTopicIndexHandle={this.onTopicIndexHandle} />
-                    </div>
-
-                </Spin>
-            </Row>
+                { !!idsArr.length &&
+                    <ExerciseMainpart idsArr={idsArr} />
+                }
+            </Spin>
         )
     }
 }
