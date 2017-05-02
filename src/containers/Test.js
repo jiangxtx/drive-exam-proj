@@ -27,6 +27,21 @@ class Test extends Component {
     }
 
     onLastOrNextTopic(index) {
+        const examIds = this.state.examTopicIds;
+        if (index < 0) {
+            notification.error({
+                message: '友情提醒',
+                description: '已经是第一题了！'
+            });
+            return false;
+        } else if (index > examIds.length - 1) {
+            notification.error({
+                message: '友情提醒',
+                description: '已经是最后一题了！'
+            });
+            return false;
+        }
+
         this.setState({
             selectedIndex: ~~index,
         })
