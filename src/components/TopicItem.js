@@ -165,13 +165,14 @@ export default class SelectTopic extends Component {
             itemStemDOM = item_index + itemStemDOM;
         }
 // console.log('topicItem index: ', topicIndex)
+        const hasDone = !!(answerState === '1'); //已做该题
 
         return (
             <div className="topicItem">
-                { (answerState === '1') && <img className="topic-judgeImg" src={judegIcon} alt=""/> }
+                { hasDone && <img className="topic-judgeImg" src={judegIcon} alt=""/> }
 
-                <Row style={{minHeight:'500px'}}>
-                    <Col md={18}>
+                <Row style={{minHeight:'300px'}}>
+                    <Col md={24}>
                         <div className="topicItem-left">
                             <p className="topicItem-stem"
                                dangerouslySetInnerHTML={{__html: contentConvert(itemStemDOM) }} />
@@ -180,19 +181,27 @@ export default class SelectTopic extends Component {
                             </div>
                         </div>
 
+                        <div className="topicItem-faovr">
+                            <Button
+                                type="default"
+                                onClick={this.toggleFavor} >
+                                <Icon type="heart" className={ isItemFaovred ? "topicItem-favorIcon":''} />{ favorBtnTitle }
+                            </Button>
+                        </div>
+
                         <div className="answerItem">
                             <span className="answer-title">选择答案：</span>
                             <span>
                                 { optionType === 1 ?
                                     <RadioGroup onChange={this.onChange} value={yourAnswer}>
-                                        <Radio value='16'>A</Radio>
-                                        <Radio value='32'>B</Radio>
-                                        <Radio value='64'>C</Radio>
-                                        <Radio value='128'>D</Radio>
+                                        <Radio value='16' disabled={hasDone}>A</Radio>
+                                        <Radio value='32' disabled={hasDone}>B</Radio>
+                                        <Radio value='64' disabled={hasDone}>C</Radio>
+                                        <Radio value='128' disabled={hasDone}>D</Radio>
                                     </RadioGroup> :
                                     <RadioGroup onChange={this.onChange} value={yourAnswer}>
-                                        <Radio value='16'>正确</Radio>
-                                        <Radio value='32'>错误</Radio>
+                                        <Radio value='16' disabled={hasDone}>正确</Radio>
+                                        <Radio value='32' disabled={hasDone}>错误</Radio>
                                     </RadioGroup>
                                 }
                             </span>
@@ -200,11 +209,7 @@ export default class SelectTopic extends Component {
 
 
                     </Col>
-                    <Col md={6} >
-                        {/*<div style={{textAlign: 'right'}} className={ !isFavor ? "topicItem-right": '' }>
-                            右侧部分
-                        </div>*/}
-                    </Col>
+
                 </Row>
                 <Row>
                     <Button type="primary" icon={btnIconType}

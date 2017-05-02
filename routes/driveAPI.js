@@ -170,8 +170,37 @@ console.log('update : ', (errorFlag == 0) && (errorIdsArr.indexOf(questionId) ==
             });
         })
     })
+});
 
+// 获取“我的错题”ID array
+router.post('/drive-myerror', function (req, res, next) {
+    const { uid, _uid } = req.body;
+    if (!uid) {
+        return res.json({
+            success: false,
+            msg: '用户信息出错'
+        })
+    }
 
+    RecordModel.find({userId: uid}, function (err, docs) {
+        /*if (!docs.length) {
+            return res.json({
+                success: false,
+                msg: '用户信息出错'
+            })
+        }*/
+        const destData = docs.length && docs[0] || {};
+        let errorIds = destData.errorIds || '';
+        // 把字符串首尾/与中间超过1个','都去掉
+        errorIds = errorIds.replace(/,{1,}/g, ',').replace(/^,/, '').replace(/,$/, '');
+        const errorIdsArr = errorIds.split(',');
+
+        return res.json({
+            success: true,
+            msg: '查询结果成功',
+            data: errorIdsArr
+        })
+    })
 })
 
 

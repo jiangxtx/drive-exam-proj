@@ -67,7 +67,7 @@ export default class extends Component {
             this.setState({
                 isFetching: false,
                 topicInfo: detail,
-                selectedIndex: index,
+                selectedIndex: 0,
             })
         })
     }

@@ -101,7 +101,7 @@ export const custom_fetch = {
         fetch_function('get',url,callback, {}, cors)
     }
 }
-var FETCH_HEAD =  {
+const FETCH_HEAD =  {
     //body:paydata,
     // credentials,    // 'include' is to send cookies in a cross-origin resource sharing request,'same-origin' is the opposite
     // mode: 'no-cors',
@@ -112,7 +112,7 @@ var FETCH_HEAD =  {
 };
 const fetch_function = function (type,url,callback,data={}, cors) {
     //console.log('query',query123)
-    let tempdata = FETCH_HEAD;
+    let tempdata = Object.assign({}, FETCH_HEAD);
     tempdata.method = type;
     // tempdata.mode = (cors!==false) ? 'cors' : 'no-cors';
     tempdata.mode = 'cors';

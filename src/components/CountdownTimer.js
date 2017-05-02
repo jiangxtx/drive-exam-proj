@@ -16,7 +16,7 @@ export default class extends Component {
     componentDidMount() {
         $(function() {
             var currentDate = new Date();
-            var endDate = new Date(currentDate.getTime() + 45*60*1000);
+            var endDate = new Date(currentDate.getTime() + 45*60*1000 - 1000);
 
             $('.countdown.styled').countdown({
                 date: endDate,

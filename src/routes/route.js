@@ -11,6 +11,7 @@ import Candidate from '../containers/Candidate'
 import OrderExercise from '../containers/OrderExercise'
 import ChapterExercise from '../containers/ChapterExercise'
 import Test from '../containers/Test'
+import MyError from '../containers/MyError'
 
 import Admin from '../containers/Admin'
 import UserManage from '../containers/UserManage'
@@ -39,6 +40,7 @@ const HomeRoute = (
                 <Route path="order" component={OrderExercise} />
                 <Route path="excs" component={ChapterExercise} />
                 <Route path="test" component={Test} />
+                <Route path="error" component={MyError} />
                 {/*
                 <Route path="exam" component={Exam} />
                 <Route path="error" component={Error} />

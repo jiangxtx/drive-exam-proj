@@ -31,9 +31,9 @@ class Main extends Component {
             { title: '顺序练习', link: '/candidate/order' },
             { title: '章节练习', link: '/candidate/excs' },
             { title: '模拟考试', link: '/candidate/test' },
-            { title: '我的错题', link: '/candidate/editE' },
-            { title: '我的收藏', link: '/home/editE' },
-            { title: '我的统计', link: '/home/editE' },
+            { title: '我的错题', link: '/candidate/error' },
+            { title: '我的收藏', link: '/home/favor' },
+            { title: '我的统计', link: '/home/statis' },
         ]
 
         return (

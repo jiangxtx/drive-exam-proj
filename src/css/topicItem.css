@@ -39,6 +39,7 @@ h1.garden-title {
 .topicItem p {
     /* line-height: 1.8; */
     margin: 6px 0;
+    margin-right: 126px;
 }
 /*.topicItem:hover {
     box-shadow: 0 0 12px 10px #e3e4e5;
@@ -146,9 +147,13 @@ h1.garden-title {
 }
 
 .topicItem-faovr {
-    text-align: right;
-    margin-bottom: 8px;
+    /* text-align: right; */
+    /* margin-bottom: 8px; */
+    position: absolute;
+    right: 0;
+    top: 0;
 }
+
 .topicItem-favorIcon {
     color: red;
 }
