@@ -3,7 +3,7 @@ import '../css/candidate.css'
 
 import React ,{Component}from  'react'
 import { Link } from 'react-router'
-import { Menu,Input,Icon,Modal,Form,Radio,notification } from 'antd'
+import { Menu,Input,Icon,Modal,Form,Card, notification } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 
 class TopicPanel extends Component {
@@ -34,12 +34,11 @@ class TopicPanel extends Component {
         }
 
         return (
-            <div className="topicPanel-wrap">
-                <h4>答题卡</h4>
+            <Card title="答题卡" className="topicPanel-wrap">
                 <div className="topicPanel">
                     { panelArr }
                 </div>
-            </div>
+            </Card>
         )
     }
 }

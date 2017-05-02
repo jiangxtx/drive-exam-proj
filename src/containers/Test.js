@@ -7,6 +7,7 @@ import { Menu,Input,Icon,Modal,Form,Radio,notification, Spin } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 import TopicPanel from '../components/TopicPanel'
 import TopicItem from '../components/TopicItem'
+import CountdownTimer from '../components/CountdownTimer'
 import { custom_fetch } from '../Tool/wrap.fetch'
 import { queryTopicDetailsByIds } from '../Tool/drive-exam-func.tool'
 
@@ -15,12 +16,20 @@ class Test extends Component {
         super(props);
         this.state={
             isFetching: true,
+            isCountdown: false,
             examTopicIds: [],
             examTopicInfos: [],
             selectedIndex: 0,
         };
 
         this.onTopicIndexHandle = this.onTopicIndexHandle.bind(this)
+        this.onLastOrNextTopic = this.onLastOrNextTopic.bind(this)
+    }
+
+    onLastOrNextTopic(index) {
+        this.setState({
+            selectedIndex: ~~index,
+        })
     }
 
     componentDidMount() {
@@ -50,6 +59,7 @@ class Test extends Component {
             onOk() {
                 _this.setState({
                     isFetching: false,
+                    isCountdown: true,
                 })
             },
         });
@@ -69,7 +79,7 @@ class Test extends Component {
     }
 
     render() {
-        const { examTopicInfos, selectedIndex, isFetching } = this.state;
+        const { examTopicInfos, selectedIndex, isFetching, isCountdown } = this.state;
         const detailInfo = examTopicInfos[~~selectedIndex] || {};
 
 
@@ -81,12 +91,15 @@ class Test extends Component {
                         <TopicItem
                             key={selectedIndex}
                             index={selectedIndex}
-                            detailInfo={detailInfo} />
+                            detailInfo={detailInfo}
+                            onLastOrNextTopic={this.onLastOrNextTopic}
+                        />
                     </Col>
                     <Col lg={4}>
-                        <h4>剩余时间</h4>
-                        45:00
-                        <h4>答题面板</h4>
+                        { isCountdown &&
+                            <CountdownTimer />
+                        }
+
                         <TopicPanel totalNum={100}
                                     onTopicIndexHandle={this.onTopicIndexHandle} />
                     </Col>

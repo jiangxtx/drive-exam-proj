@@ -170,7 +170,7 @@ export default class SelectTopic extends Component {
             <div className="topicItem">
                 { (answerState === '1') && <img className="topic-judgeImg" src={judegIcon} alt=""/> }
 
-                <Row >
+                <Row style={{minHeight:'500px'}}>
                     <Col md={18}>
                         <div className="topicItem-left">
                             <p className="topicItem-stem"

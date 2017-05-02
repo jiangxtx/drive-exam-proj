@@ -18,9 +18,20 @@
 }
 
 .topicPanel {
-    max-height: 250px;
+    max-height: 486px;
     overflow: auto;
     max-width: 870px;
     border: 2px solid #2f5c89;
     padding: 2px;
+}
+
+ .ant-card-head-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+ .ant-card-body {
+     padding: 0;
+}
+.countdown-wrap {
+    margin-bottom: 15px;
 }
