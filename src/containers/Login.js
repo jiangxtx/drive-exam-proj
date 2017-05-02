@@ -1,12 +1,18 @@
 import React ,{Component}from 'react'
 import { Link } from 'react-router'
-import { Card, Form, Icon, Input, Button, Checkbox } from 'antd'
+import { Card, Form, Icon, Input, Button, message } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 import { drawNetCanvas } from '../Tool/drawNetCanvas'
+import { custom_fetch } from '../Tool/wrap.fetch'
+
 import '../css/home/login.css'
 
 const FormItem = Form.Item;
 const canvasId = 'netsBackground';
+message.config({
+    top: '45%',
+    duration: 2,
+});
 
 const LoginForm = Form.create()( React.createClass({
     handleRegisterSubmit(e) {
@@ -15,12 +21,23 @@ const LoginForm = Form.create()( React.createClass({
             if (!err) {
                 // alert('单击登录。。。')
                 console.log('Received values of form: ', values);
+
                 if (values.username === 'admin' && values.password === '123456') {
                     window.location.href = './index.html#/admin';
-                } else if (values.username === 'jack' && values.password === '123456') {
-                    window.location.href = './index.html#/candidate';
                 } else {
-                    alert('Sorry, your name or password is Error!');
+                    custom_fetch.post('http://127.0.0.1:3000/drive-login', values, json => {
+                        const flag = json.success || false;
+                        if(flag) {
+                            window.sessionStorage.setItem('userInfo', JSON.stringify({
+                                name: json.name,
+                                id: json.id,
+                                _uid: json._id
+                            }));
+                            window.location.href = './index.html#/candidate?_uid=' + json._id;
+                        } else {
+                            message.error(json.msg || '用户名或密码错误');
+                        }
+                    })
                 }
             }
         });

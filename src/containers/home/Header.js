@@ -5,8 +5,10 @@ import React ,{Component}from  'react'
 import { Link } from 'react-router'
 import {bindActionCreators} from  'redux'
 import {connect} from 'react-redux'
-import { Menu,Input,Icon,Modal,Form,Radio,notification} from 'antd'
+import { Menu,Button,Icon,Modal,Form,Radio,notification} from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../../layout'
+
+
 
 class Head extends Component {
     constructor(props) {
@@ -31,13 +33,13 @@ class Head extends Component {
             <div className="headTop">
                 <Container>
                     <Row>
-                        <Col lg={8}>
+                        <Col sm={8}>
                             <div className="headLogo">
                                 <h1 className="headLogo-title">
                                     <Link to="/">考试系统平台</Link></h1>
                            </div>
                         </Col>
-                        <Col lg={4}>
+                        <Col sm={4}>
                             <div className="headLogin">
                                 <Link activeClassName="link-active" to="register">注册</Link>
                                 <span style={{marginLeft:"5px",marginRight:"5px"}}>|</span>

@@ -9,8 +9,13 @@ import IndexHead from '../containers/home/Header'
 
 import Candidate from '../containers/Candidate'
 import OrderExercise from '../containers/OrderExercise'
-import Exercise from '../containers/Exercise'
+import ChapterExercise from '../containers/ChapterExercise'
 import Test from '../containers/Test'
+
+import Admin from '../containers/Admin'
+import UserManage from '../containers/UserManage'
+import ImportManage from '../containers/ImportManage'
+import TopicManage from '../containers/TopicManage'
 
 import '../css/public/public.css'
 
@@ -30,15 +35,22 @@ const HomeRoute = (
             <Route path="register" component={Register} />
 
             <Route path="candidate" component={Candidate} >
-                <IndexRoute component={Exercise} />
+                <IndexRoute component={OrderExercise} />
                 <Route path="order" component={OrderExercise} />
-                <Route path="excs" component={Exercise} />
+                <Route path="excs" component={ChapterExercise} />
                 <Route path="test" component={Test} />
                 {/*
                 <Route path="exam" component={Exam} />
                 <Route path="error" component={Error} />
                 <Route path="favor" component={Favor} />
                 <Route path="statis" component={Statistics} />*/}
+            </Route>
+
+            <Route path="admin" component={Admin} >
+                <IndexRoute component={UserManage} />
+                <Route path="user" component={UserManage} />
+                <Route path="import" component={ImportManage} />
+                <Route path="topic" component={TopicManage} />
             </Route>
 
         </Route>

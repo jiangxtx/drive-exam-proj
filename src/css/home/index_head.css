@@ -13,11 +13,11 @@
 
 .headLogo{
     padding-left:0px;
-    min-height:50px;
+    min-height:90px;
 }
 .headLogo-title {
     font-size: 30px;
-    /*line-height: 90px;*/
+    line-height: 90px;
 }
 .headLogo-title a {
     color: #fff;
