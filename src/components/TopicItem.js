@@ -24,7 +24,7 @@ export default class SelectTopic extends Component {
         this.state= {
             isFetching: false,
             isShow: false,
-            isItemFaovred: true, // 该题目是否被收藏
+            isItemFaovred: false, // 该题目是否被收藏
             yourAnswer: '',
             answerState: '0', // 0: 答题状态，1: 查看解答；
         }
@@ -32,6 +32,7 @@ export default class SelectTopic extends Component {
         this.toggleAnswerPart = this.toggleAnswerPart.bind(this)
         this.onChange = this.onChange.bind(this)
         this.convertAnswer = this.convertAnswer.bind(this)
+        this.toggleFavor = this.toggleFavor.bind(this)
     }
 
     /**
@@ -90,7 +91,65 @@ export default class SelectTopic extends Component {
         });
     }
 
+    toggleFavor() {
+        const detailInfo = this.props.detailInfo || {};
+        const { questionId } = detailInfo;
+
+        const userInfo = window.sessionStorage.getItem('userInfo');
+        const userData = JSON.parse(userInfo || '{}');
+        const { id, _uid } = userData;
+
+        const isfavored = this.state.isItemFaovred; //该题是否已被收藏
+
+        const url = `http://127.0.0.1:3000/drive-toggleFavor?`
+        const data = {
+            uid: id,
+            _uid,
+            questionId,
+            isfavored
+        };
+        custom_fetch.post(url, data, json => {
+            if (!json.success) {
+                alert(json.msg)
+                return false;
+            }
+
+            const isItemFaovred = json.data.isfavored || false;
+            this.setState({
+                isItemFaovred
+            })
+
+        })
+    }
+
+    // 注意 这里没切换题目时会执行该方法
     componentDidMount() {
+        // alert('updating...')
+        const detailInfo = this.props.detailInfo || {};
+        const { questionId } = detailInfo;
+
+        const userInfo = window.sessionStorage.getItem('userInfo');
+        const userData = JSON.parse(userInfo || '{}');
+        const { id, _uid } = userData;
+
+        const url = `http://127.0.0.1:3000/drive-topicFavor?`
+        const data = {
+            uid: id,
+            _uid,
+            questionId
+        };
+        custom_fetch.post(url, data, json => {
+            if (!json.success) {
+                alert(json.msg)
+                return false;
+            }
+
+            const isItemFaovred = json.data.isfavored || false;
+            this.setState({
+                isItemFaovred
+            })
+
+        })
     }
 
     render() {

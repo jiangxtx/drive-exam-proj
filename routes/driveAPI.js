@@ -203,6 +203,75 @@ router.post('/drive-myerror', function (req, res, next) {
     })
 })
 
+// 获取题目的收藏信息
+router.post('/drive-topicFavor', function (req, res, next) {
+    const { uid, _uid, questionId } = req.body;
+    if (!uid) {
+        return res.json({
+            success: false,
+            msg: '用户信息出错'
+        })
+    }
+
+    RecordModel.find({userId: uid}, function (err, docs) {
+        const destData = docs.length && docs[0] || {};
+        let favorIds = destData.favorIds || '';
+        // 把字符串首尾/与中间超过1个','都去掉
+        favorIds = favorIds.replace(/,{1,}/g, ',').replace(/^,/, '').replace(/,$/, '');
+        const favorIdsArr = favorIds.split(',');
+        const isfavored = (favorIdsArr.indexOf(questionId) > -1);
+
+        return res.json({
+            success: true,
+            msg: '查询结果成功',
+            data: {
+                questionId,
+                isfavored
+            }
+        })
+    })
+})
+
+// 处理题目的收藏情况
+router.post('/drive-toggleFavor', function (req, res, next) {
+    const { uid, _uid, questionId, isfavored } = req.body;
+    if (!uid) {
+        return res.json({
+            success: false,
+            msg: '用户信息出错'
+        })
+    }
+
+    RecordModel.find({userId: uid}, function (err, docs) {
+        const destData = docs.length && docs[0] || {};
+        let favorIds = destData.favorIds || '';
+        // 把字符串首尾/与中间超过1个','都去掉
+        favorIds = favorIds.replace(/,{1,}/g, ',').replace(/^,/, '').replace(/,$/, '');
+        const favorIdsArr = favorIds.split(',');
+        const hasDBContained = (favorIdsArr.indexOf(questionId) > -1);
+
+        if (isfavored) {    // 执行“取消收藏”操作
+            if (!hasDBContained) {
+                return res.json({
+                    success: false,
+                    msg: '改题目不在“我的收藏”中'
+                })
+            }
+
+            // TODO...
+
+        } else {    // 执行“收藏”操作
+            if (hasDBContained) {
+                return res.json({
+                    success: false,
+                    msg: '改题目已经在“我的收藏”中'
+                })
+            }
+
+            // TODO...
+        }
+    })
+})
 
 
 module.exports = router;
