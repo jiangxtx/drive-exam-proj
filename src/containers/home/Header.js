@@ -35,7 +35,7 @@ class Head extends Component {
                             <div className="headLogo">
                                 <h1 className="headLogo-title">
                                     <Link to="/">考试系统平台</Link></h1>
-                            </div>
+                           </div>
                         </Col>
                         <Col lg={4}>
                             <div className="headLogin">
