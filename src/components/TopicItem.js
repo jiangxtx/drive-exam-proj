@@ -5,7 +5,7 @@ import '../css/public/public.css'
 import '../css/topicItem.css'
 
 import React,{Component} from 'react'
-import { Form, Input, Modal,Button, DatePicker, Icon, Radio, Spin, Row, Col } from 'antd';
+import { Form, Input, Modal,Button, DatePicker, Icon, Radio, Spin, Row, Col, notification } from 'antd';
 import { dateFormatUtil } from '../Tool/date-time.tool'
 import { cutFloat_dot2 } from '../Tool/number.tool'
 import { contentConvert, convertKeySteps, convertYourAnswer, convertAnalysis, convertGapUnderline } from '../Tool/topicContentAnalysis'
@@ -91,6 +91,9 @@ export default class SelectTopic extends Component {
         });
     }
 
+    /**
+     * 收藏、取消收藏操作
+     */
     toggleFavor() {
         const detailInfo = this.props.detailInfo || {};
         const { questionId } = detailInfo;
@@ -106,18 +109,24 @@ export default class SelectTopic extends Component {
             uid: id,
             _uid,
             questionId,
-            isfavored
+            isfavored : isfavored ? 1 : 0
         };
         custom_fetch.post(url, data, json => {
             if (!json.success) {
-                alert(json.msg)
+                notification.error({
+                    message: '操作提示',
+                    description: json.msg
+                })
                 return false;
             }
 
             const isItemFaovred = json.data.isfavored || false;
             this.setState({
                 isItemFaovred
-            })
+            }, () => notification.success({
+                message: '操作提示',
+                description: json.msg
+            }))
 
         })
     }

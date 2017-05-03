@@ -12,6 +12,8 @@ import OrderExercise from '../containers/OrderExercise'
 import ChapterExercise from '../containers/ChapterExercise'
 import Test from '../containers/Test'
 import MyError from '../containers/MyError'
+import MyFavor from '../containers/MyFavor'
+import MyStatis from '../containers/MyStatis'
 
 import Admin from '../containers/Admin'
 import UserManage from '../containers/UserManage'
@@ -41,11 +43,8 @@ const HomeRoute = (
                 <Route path="excs" component={ChapterExercise} />
                 <Route path="test" component={Test} />
                 <Route path="error" component={MyError} />
-                {/*
-                <Route path="exam" component={Exam} />
-                <Route path="error" component={Error} />
-                <Route path="favor" component={Favor} />
-                <Route path="statis" component={Statistics} />*/}
+                <Route path="favor" component={MyFavor} />
+                <Route path="statis" component={MyStatis} />
             </Route>
 
             <Route path="admin" component={Admin} >

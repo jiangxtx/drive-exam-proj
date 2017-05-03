@@ -203,6 +203,67 @@ router.post('/drive-myerror', function (req, res, next) {
     })
 })
 
+// 获取“我的收藏”ID array
+router.post('/drive-myfavor', function (req, res, next) {
+    const { uid, _uid } = req.body;
+    if (!uid) {
+        return res.json({
+            success: false,
+            msg: '用户信息出错'
+        })
+    }
+
+    RecordModel.find({userId: uid}, function (err, docs) {
+        const destData = docs.length && docs[0] || {};
+        let favorIds = destData.favorIds || '';
+        // 把字符串首尾/与中间超过1个','都去掉
+        favorIds = favorIds.replace(/,{1,}/g, ',').replace(/^,/, '').replace(/,$/, '');
+        const favorIdsArr = favorIds.split(',');
+
+        return res.json({
+            success: true,
+            msg: '查询结果成功',
+            data: favorIdsArr
+        })
+    })
+})
+
+// 获取我的统计信息
+router.post('/drive-mystatis', function (req, res, next) {
+    const { uid, _uid } = req.body;
+    if (!uid) {
+        return res.json({
+            success: false,
+            msg: '用户信息出错'
+        })
+    }
+
+    RecordModel.find({userId: uid}, function (err, docs) {
+        const destData = docs.length && docs[0] || {};
+        let { favorIds, doneIds, errorIds } = destData;
+
+        // 把字符串首尾/与中间超过1个','都去掉
+        favorIds = favorIds.replace(/,{1,}/g, ',').replace(/^,/, '').replace(/,$/, '');
+        doneIds = doneIds.replace(/,{1,}/g, ',').replace(/^,/, '').replace(/,$/, '');
+        errorIds = errorIds.replace(/,{1,}/g, ',').replace(/^,/, '').replace(/,$/, '');
+
+        const favorIdsArr = favorIds.split(',');
+        const doneIdsArr = doneIds.split(',');
+        const errorIdsArr = errorIds.split(',');
+
+        return res.json({
+            success: true,
+            msg: '查询统计结果成功',
+            data: {
+                doneTotal: doneIdsArr.length,
+                errorTotal: errorIdsArr.length,
+                favorTotal: favorIdsArr.length,
+                allTotal: 1492  // TODO, 暂时写死 --2017-5-3；
+            }
+        })
+    })
+})
+
 // 获取题目的收藏信息
 router.post('/drive-topicFavor', function (req, res, next) {
     const { uid, _uid, questionId } = req.body;
@@ -250,7 +311,7 @@ router.post('/drive-toggleFavor', function (req, res, next) {
         const favorIdsArr = favorIds.split(',');
         const hasDBContained = (favorIdsArr.indexOf(questionId) > -1);
 
-        if (isfavored) {    // 执行“取消收藏”操作
+        if (~~isfavored) {    // 执行“取消收藏”操作
             if (!hasDBContained) {
                 return res.json({
                     success: false,
@@ -258,8 +319,21 @@ router.post('/drive-toggleFavor', function (req, res, next) {
                 })
             }
 
-            // TODO...
+            const exitedIndex = favorIdsArr.indexOf(questionId);
+            favorIdsArr.splice(exitedIndex, 1); // delete current topicId, favorIdsArr changs itself;
 
+            RecordModel.update({userId: ~~uid}, {
+                favorIds: favorIdsArr.join(',')
+            }, function (error) {
+                return res.json({
+                    success: !error,
+                    msg: !error ? "取消收藏成功" : "取消收藏失败",
+                    data: {
+                        questionId,
+                        isfavored: false, // 取消收藏标识
+                    }
+                })
+            })
         } else {    // 执行“收藏”操作
             if (hasDBContained) {
                 return res.json({
@@ -268,7 +342,20 @@ router.post('/drive-toggleFavor', function (req, res, next) {
                 })
             }
 
-            // TODO...
+            favorIdsArr.push(questionId);
+
+            RecordModel.update({userId: ~~uid}, {
+                favorIds: favorIdsArr.join(',')
+            }, function (error) {
+                return res.json({
+                    success: !error,
+                    msg: !error ? "收藏题目成功" : "收藏题目失败",
+                    data: {
+                        questionId,
+                        isfavored: true, // 收藏标识
+                    }
+                })
+            })
         }
     })
 })
