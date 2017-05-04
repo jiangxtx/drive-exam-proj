@@ -4,6 +4,7 @@ var router = express.Router();
 var UserModel = require('../database/db').UserModel;
 var ChapterModel = require('../database/db').ChapterModel;
 var RecordModel = require('../database/db').RecordModel;
+var TopicModel = require('../database/db').TopicModel;
 
 
 /************************** 获取“驾考宝典”试题 BEGIN ********************************/
@@ -66,10 +67,6 @@ router.post('/drive-regst', function (req, res, next) {
             })
         }
     })
-
-
-
-
 });
 
 // 用户登录
@@ -88,6 +85,62 @@ router.post('/drive-login', function (req, res, next) {
     })
 
 })
+
+// 获取所有用户信息
+router.get('/drive-getAllusers', function (req, res, next) {
+    UserModel.find({}, function (err, users) {
+        if (err) {
+            return res.json({
+                success: false,
+                msg: '获取用户信息失败'
+            });
+        }
+
+        const userData = [];
+        users.length && users.forEach(item => userData.push({
+            name: item.name,
+            email: item.email,
+            id: item.id
+        }));
+
+        return res.json({
+            success: true,
+            msg: '获取用户信息成功',
+            data: userData
+        });
+    })
+})
+
+// 获取所有题目信息
+router.get('/drive-getAlltopics', function (req, res, next) {
+    TopicModel.find({}, function (err, topics) {
+        if (err) {
+            return res.json({
+                success: false,
+                msg: '获取题目信息失败'
+            });
+        }
+
+        const topicsData = [];
+        topics.length && topics.forEach(item => {
+            const detailObj = JSON.parse(item.detail);
+
+            topicsData.push({
+                id: item.questionId,
+                question: detailObj.question,
+                type: detailObj.optionType,
+                difficulty: detailObj.difficulty,
+            });
+        });
+
+        return res.json({
+            success: true,
+            msg: '获取题目信息成功',
+            data: topicsData
+        });
+    })
+})
+
 
 // 获取章节信息
 router.get('/drive-chapters', function (req, res, next) {

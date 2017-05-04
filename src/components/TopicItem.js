@@ -15,8 +15,8 @@ import { custom_fetch } from '../Tool/wrap.fetch'
 const RadioGroup = Radio.Group;
 
 const selectSymbol = ['A', 'B','C', 'D', 'E', 'F','G', 'H', 'I'];  // 选择题题目选项的标识符
-const topicRightIcon = require('../img/topic-right.jpg')
-const topicErrorIcon = require('../img/topic-error.jpg')
+const topicRightIcon = require('../img/icon-correct.jpg')
+const topicErrorIcon = require('../img/icon-error.jpg')
 
 export default class SelectTopic extends Component {
     constructor(props) {

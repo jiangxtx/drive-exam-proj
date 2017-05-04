@@ -159,9 +159,10 @@ h1.garden-title {
 }
 .topic-judgeImg {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 102px;
+    right: 35%;
     z-index: -10;
+    width: 64px;
 }
 .topicItem-left {
     margin-bottom: 12px;

@@ -1,4 +1,7 @@
 .dataTable .ant-table-thead>tr>th {
-    background-color: #2f5c89;
+    background-color: lightblue;
     color: #fff;
+}
+.ant-table {
+    font-size: 14px;
 }
