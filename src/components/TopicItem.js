@@ -18,7 +18,7 @@ const selectSymbol = ['A', 'B','C', 'D', 'E', 'F','G', 'H', 'I'];  // 选择题�
 const topicRightIcon = require('../img/topic-right.jpg')
 const topicErrorIcon = require('../img/topic-error.jpg')
 
-export default class SelectTopic extends Component {
+export default class extends Component {
     constructor(props) {
         super(props)
         this.state= {
@@ -30,7 +30,7 @@ export default class SelectTopic extends Component {
         }
 
         this.toggleAnswerPart = this.toggleAnswerPart.bind(this)
-        this.onChange = this.onChange.bind(this)
+        this.onSelectAnswer = this.onSelectAnswer.bind(this)
         this.convertAnswer = this.convertAnswer.bind(this)
         this.toggleFavor = this.toggleFavor.bind(this)
     }
@@ -61,7 +61,7 @@ export default class SelectTopic extends Component {
         })
     }
 
-    onChange(e) {
+    onSelectAnswer(e) {
         // console.log('Your answer is : ' + e.target.value)
         const detailInfo = this.props.detailInfo || {};
         const { answer, questionId } = detailInfo;
@@ -86,7 +86,14 @@ export default class SelectTopic extends Component {
             };
             custom_fetch.post(url, data, json => {
 
-            })
+            });
+
+            // 模拟考试时，把做题答案传回模拟考试板块
+            const { ownPanel, index } = this.props;
+
+            if (ownPanel === 'test') {
+                this.props.returnUserAnswer(index, (yourAnswer == answer));
+            }
 
         });
     }
@@ -163,6 +170,7 @@ export default class SelectTopic extends Component {
 
     render() {
         const answerTime = '2017-03-13';
+        const { ownPanel } = this.props;  // { 所属板块， }
 
         const detailInfo = this.props.detailInfo || {};
         const topicIndex = this.props.index;
@@ -250,24 +258,26 @@ export default class SelectTopic extends Component {
                         </div>
 
                         <div className="topicItem-faovr">
-                            <Button
-                                type="default"
-                                onClick={this.toggleFavor} >
-                                <Icon type="heart" className={ isItemFaovred ? "topicItem-favorIcon":''} />{ favorBtnTitle }
-                            </Button>
+                            { (ownPanel !== 'test') &&
+                                <Button
+                                    type="default"
+                                    onClick={this.toggleFavor} >
+                                    <Icon type="heart" className={ isItemFaovred ? "topicItem-favorIcon":''} />{ favorBtnTitle }
+                                </Button>
+                            }
                         </div>
 
                         <div className="answerItem">
                             <span className="answer-title">选择答案：</span>
                             <span>
                                 { optionType === 1 ?
-                                    <RadioGroup onChange={this.onChange} value={yourAnswer}>
+                                    <RadioGroup onChange={this.onSelectAnswer} value={yourAnswer}>
                                         <Radio value='16' disabled={hasDone}>A</Radio>
                                         <Radio value='32' disabled={hasDone}>B</Radio>
                                         <Radio value='64' disabled={hasDone}>C</Radio>
                                         <Radio value='128' disabled={hasDone}>D</Radio>
                                     </RadioGroup> :
-                                    <RadioGroup onChange={this.onChange} value={yourAnswer}>
+                                    <RadioGroup onChange={this.onSelectAnswer} value={yourAnswer}>
                                         <Radio value='16' disabled={hasDone}>正确</Radio>
                                         <Radio value='32' disabled={hasDone}>错误</Radio>
                                     </RadioGroup>

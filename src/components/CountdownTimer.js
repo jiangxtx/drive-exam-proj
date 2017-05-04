@@ -14,6 +14,7 @@ export default class extends Component {
     }
 
     componentDidMount() {
+        const _this = this;
         $(function() {
             var currentDate = new Date();
             var endDate = new Date(currentDate.getTime() + 45*60*1000 - 1000);
@@ -36,7 +37,8 @@ export default class extends Component {
                 },
                 onEnd: function () {
                     $(this.el).addClass('ended');
-                    alert('时间到！')
+                    console.log('计时器官方提醒：考试时间已到！');
+                    _this.props.onCountdownTimerEnd(1);
                 }
             });
 
@@ -45,7 +47,7 @@ export default class extends Component {
 
     render() {
         return (
-            <Card title="计时器" className="countdown-wrap">
+            <Card title="剩余时间" className="countdown-wrap">
                 {/*<span className="countdown-wrap-title">计时器</span>*/}
                 <div className="countdown styled"></div>
             </Card>

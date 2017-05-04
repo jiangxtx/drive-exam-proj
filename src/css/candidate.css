@@ -35,3 +35,17 @@
 .countdown-wrap {
     margin-bottom: 15px;
 }
+
+.panelItem-title {
+    margin: 25px 0;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 8px;
+}
+.ant-alert-description {
+    font-size: 14px;
+}
+.panelItem-info-errorNo {
+    font-weight: 600;
+    color: red;
+    margin: 0 4px;
+}
