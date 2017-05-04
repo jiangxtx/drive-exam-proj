@@ -99,7 +99,7 @@ class Login extends Component {
 
                 <div className="loginPanel">
                     <Card title={<div className="loginPanel-title">用户登录</div>}
-                          style={{backgroundColor:'#f5f5f5'}}
+                          style={{backgroundColor:'#f5f5f5', padding: '24px'}}
                           bordered={false} >
                         <LoginForm />
                     </Card>

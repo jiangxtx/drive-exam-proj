@@ -413,5 +413,17 @@ router.post('/drive-toggleFavor', function (req, res, next) {
     })
 })
 
+// 依据题目 IDs 获取对应的试题信息
+router.post('/drive-queryTopicsByIds', function (req, res, next) {
+    const { uid, _uid, idsArr } = req.body;
+    if (!uid) {
+        return res.json({
+            success: false,
+            msg: '用户信息出错'
+        })
+    }
+
+})
+
 
 module.exports = router;
