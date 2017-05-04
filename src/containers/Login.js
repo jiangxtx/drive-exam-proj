@@ -88,6 +88,8 @@ class Login extends Component {
         super(props)
     }
     componentDidMount() {
+        window.sessionStorage.removeItem('userInfo');  // 回到首页则清除用户session；
+
         drawNetCanvas(canvasId)
     }
 
