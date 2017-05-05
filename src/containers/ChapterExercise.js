@@ -87,8 +87,7 @@ class ChapterExercise extends Component {
                     </Select>
                 </div>
 
-                <ExerciseMainpart idsArr={idsArr} />
-
+                { !!idsArr.length && <ExerciseMainpart idsArr={idsArr} /> }
 
             </Row>
         )

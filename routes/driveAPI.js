@@ -195,7 +195,7 @@ router.post('/drive-record', function (req, res, next) {
                 recordEntity.save();
             } else { // 更新已有数据
                 const exitInfo = docs1[0];
-                const { doneIds, errorIds } = exitInfo;
+                const { doneIds='', errorIds='' } = exitInfo;
                 const doneIdsArr = doneIds.split(',');
                 const errorIdsArr = errorIds.split(',');
                 if (doneIdsArr.indexOf(questionId) === -1) {
@@ -293,7 +293,7 @@ router.post('/drive-mystatis', function (req, res, next) {
 
     RecordModel.find({userId: uid}, function (err, docs) {
         const destData = docs.length && docs[0] || {};
-        let { favorIds, doneIds, errorIds } = destData;
+        let { favorIds='', doneIds='', errorIds='' } = destData;
 
         // 把字符串首尾/与中间超过1个','都去掉
         favorIds = favorIds.replace(/,{1,}/g, ',').replace(/^,/, '').replace(/,$/, '');
@@ -357,6 +357,28 @@ router.post('/drive-toggleFavor', function (req, res, next) {
     }
 
     RecordModel.find({userId: uid}, function (err, docs) {
+        if (!docs.length) { // 插入新数据
+            const recordEntity = new RecordModel({
+                userId: ~~uid,
+                favorIds: questionId,
+                doneIds: '',
+                errorIds: '',
+            });
+
+            recordEntity.save(function (err) {
+                console.log('save record 1: ', err)
+            });
+
+            return res.json({
+                success: true,
+                msg: "收藏题目成功",
+                data: {
+                    questionId,
+                    isfavored: true, // 收藏标识
+                }
+            })
+        }
+
         const destData = docs.length && docs[0] || {};
         let favorIds = destData.favorIds || '';
         // 把字符串首尾/与中间超过1个','都去掉

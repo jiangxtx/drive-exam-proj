@@ -84,14 +84,15 @@ export default class extends Component {
             <Spin spinning={isFetching}>
             <Row>
                 <Col lg={8}>
-
-                    <TopicItem
-                        key={selectedIndex}
-                        index={selectedIndex}
-                        detailInfo={detailInfo}
-                        state={this.state.answerState}
-                        onLastOrNextTopic={this.onLastOrNextTopic}
-                    />
+                    { !!detailInfo.questionId &&
+                        <TopicItem
+                            key={selectedIndex}
+                            index={selectedIndex}
+                            detailInfo={detailInfo}
+                            state={this.state.answerState}
+                            onLastOrNextTopic={this.onLastOrNextTopic}
+                        />
+                    }
                 </Col>
                 <Col lg={4}>
                     <div className="">
