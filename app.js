@@ -29,6 +29,8 @@ app.use(cookieParser());
 
 // 利用 Express 托管静态文件
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'lib')));
+app.use(express.static(path.join(__dirname, 'src/Tool')));
 
 // Enable All CORS Requests
 app.use(require('cors')());

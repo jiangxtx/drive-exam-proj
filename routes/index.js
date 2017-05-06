@@ -3,7 +3,11 @@ var router = express.Router();
 
 var UserModel = require('../database/db').UserModel;
 
-// var { custom_fetch } = require('../src/Tool/wrap.fetch');
+
+// welcome
+router.get('/welcome', function (req, res) {
+    res.render('welcome', { title: 'express-mongoDB Guide' });
+})
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
