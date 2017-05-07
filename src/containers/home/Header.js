@@ -39,6 +39,7 @@ class Head extends Component {
 
         setInterval(this.checkLogin(), 1500);
 
+
     }
 
     render() {
