@@ -437,14 +437,36 @@ router.post('/drive-toggleFavor', function (req, res, next) {
 
 // 依据题目 IDs 获取对应的试题信息
 router.post('/drive-queryTopicsByIds', function (req, res, next) {
-    const { uid, _uid, idsArr } = req.body;
+    let { uid, _uid, idsStr } = req.body;
     if (!uid) {
         return res.json({
             success: false,
             msg: '用户信息出错'
         })
     }
+    const idsArr = JSON.parse(idsStr);
 
+    TopicModel.find({'questionId': {"$in": idsArr }}, function (err, docs) {
+        // console.log('queryTopicinfo22: ', docs)
+
+        const destData = [];
+        idsArr.forEach(item => {
+            for (let i=0; i<docs.length; i++) {
+                if (~~item === docs[i].questionId) {
+                    const topicInfo = JSON.parse(docs[i].detail || null) || {};
+                    destData.push(topicInfo);
+                    docs.splice(i, 1);  // delete selected Item, for better performence;
+                    break;
+                }
+            }
+        });
+
+        return res.json({
+            success: true,
+            msg: '查询试题信息成功',
+            data: destData
+        });
+    })
 })
 
 

@@ -23,6 +23,7 @@ class Test extends Component {
 
             hasAnsweredIds: [],  // 已答题ID数组
             errorNum: 0,  // the number of answerWrong
+            correctNum: 0,  // the number of answerCorrect
         };
 
         this.onTopicIndexHandle = this.onTopicIndexHandle.bind(this)
@@ -42,7 +43,7 @@ class Test extends Component {
         if (type === 1) {
             content = '考试时间已结束，请单击提交按钮提交考试！';
         }
-        if (errorNum > 2) {
+        if (errorNum > 10) {
             content = '很遗憾，您已经做错超过 10 题，请单击提交按钮提交本次考试！';
         }
 
@@ -62,14 +63,16 @@ class Test extends Component {
      */
     returnUserAnswer(index, isCorrect) {
         index = ~~index;
-        let { hasAnsweredIds, errorNum } = this.state;
+        let { hasAnsweredIds, errorNum, correctNum } = this.state;
 
         errorNum = isCorrect ? errorNum : (errorNum + 1);
+        correctNum = !isCorrect ? correctNum : (correctNum + 1);
         if (hasAnsweredIds.indexOf(index) === -1) {
             hasAnsweredIds.push(index);
             this.setState({
                 hasAnsweredIds,
-                errorNum
+                errorNum,
+                correctNum
             }, () => this.onTriggerTestEnd(0) )
         }
     }
@@ -144,7 +147,7 @@ class Test extends Component {
     render() {
         const {
             examTopicInfos, selectedIndex,
-            isFetching, isCountdown, errorNum
+            isFetching, isCountdown, errorNum, correctNum
         } = this.state;
         const detailInfo = examTopicInfos[~~selectedIndex] || {};
 
@@ -152,7 +155,11 @@ class Test extends Component {
             <div>
                 <p>本试卷包括 40 道判断题和 60 道选择题，全为客观题。</p>
                 <p>考试的总时间为 45 分钟。</p>
-                <p>您当前的<strong>做错题数</strong>为：<span className="panelItem-info-errorNo">{errorNum}</span>。</p>
+                <p>您当前的<strong>做错题数</strong>为：
+                    <span className="panelItem-info-errorNo">{errorNum}</span>。
+                    您当前的<strong>做对题数</strong>为：
+                    <span className="panelItem-info-errorNo">{correctNum}</span>。
+                </p>
             </div>
         )
 
