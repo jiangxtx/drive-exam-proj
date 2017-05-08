@@ -3,7 +3,7 @@ import '../css/candidate.css'
 
 import React ,{Component}from  'react'
 import { Link } from 'react-router'
-import { Menu,Input,Select, Icon,Modal,Form,Radio,notification } from 'antd'
+import { Menu,Input,Select, Icon,Modal,Form, Spin,notification } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 
 import ExerciseMainpart from './ExerciseMainpart'
@@ -17,6 +17,7 @@ class ChapterExercise extends Component {
         this.state={
             chapterList: [],
             selectedIndex: 0,
+            isFetching: true,
         };
 
         this.onChapterChange = this.onChapterChange.bind(this)
@@ -45,7 +46,8 @@ class ChapterExercise extends Component {
                 });
 
                 this.setState({
-                    chapterList: chapterInfo
+                    chapterList: chapterInfo,
+                    isFetching: false,
                 })
             })
         })
@@ -62,24 +64,27 @@ class ChapterExercise extends Component {
             { name: '第五章 上海地区题库', id: 221, total: 80 },
             { name: '第六章 上海“快处易赔”考题', id: 222, total: 87 },
         ]*/
-        const { chapterList, selectedIndex } = this.state;
+        const { chapterList, selectedIndex, isFetching } = this.state;
 
         const idsArr = chapterList[~~selectedIndex] && chapterList[~~selectedIndex].idsArr || [];
 
         const chapterSelectDOM = chapterList.map((item, idx) => {
-            return <Option key={idx} value={item.index+''}>{item.name}</Option>;
+            return <Option key={idx} value={`${item.index}`}>{item.name}</Option>;
         });
 
         return (
-            <Row>
-                <h2>章节练习</h2>
+            <Spin spinning={isFetching}>
+                <h2 className="crumb-title">
+                    <span className="crumb-title-main">章节练习</span>
+                    <span className="crumb-title-sub">按照章节依次练习题库中的所有习题</span>
+                </h2>
 
                 <div className="chapter-filter">
                     <span>章节：</span>
                     <Select
-                        defaultValue={'0'}
+                        defaultValue="0"
                         style={{ width: 380 }}
-                        placeholder="Select a person"
+                        placeholder="请选择一个章节"
                         optionFilterProp="children"
                         onChange={this.onChapterChange}
                     >
@@ -87,9 +92,9 @@ class ChapterExercise extends Component {
                     </Select>
                 </div>
 
-                { !!idsArr.length && <ExerciseMainpart idsArr={idsArr} /> }
+                { !!idsArr.length && <ExerciseMainpart key={selectedIndex} idsArr={idsArr} /> }
 
-            </Row>
+            </Spin>
         )
     }
 }

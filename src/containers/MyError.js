@@ -58,8 +58,10 @@ class OrderExercise extends Component {
         // console.log('OrderExercise render seledIndex: ', selectedIndex)
         return (
             <Spin spinning={isFetching}>
-
-                <h2>我的错题</h2>
+                <h2 className="crumb-title">
+                    <span className="crumb-title-main">我的错题</span>
+                    <span className="crumb-title-sub">历次做题中我的错题集</span>
+                </h2>
 
                 { !!idsArr.length &&
                     <ExerciseMainpart idsArr={idsArr} />

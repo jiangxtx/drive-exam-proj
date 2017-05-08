@@ -24,6 +24,7 @@ class Test extends Component {
             hasAnsweredIds: [],  // 已答题ID数组
             errorNum: 0,  // the number of answerWrong
             correctNum: 0,  // the number of answerCorrect
+
         };
 
         this.onTopicIndexHandle = this.onTopicIndexHandle.bind(this)
@@ -166,10 +167,12 @@ class Test extends Component {
 
         return (
             <Spin size="large" spinning={isFetching}>
+                <h2 className="crumb-title">
+                    <span className="crumb-title-main">全真模拟测试</span>
+                    <span className="crumb-title-sub">驾照科目一考试-全真模拟测试</span>
+                </h2>
                 <Row>
                     <Col lg={8}>
-                        <h3 className="panelItem-title">驾照科目一考试-全真模拟测试</h3>
-
                         <Alert
                             message="考生考试信息"
                             description={alert_description}

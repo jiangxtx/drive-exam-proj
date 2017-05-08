@@ -155,6 +155,10 @@ export default class extends Component {
 
         return (
             <Spin spinning={isFetching}>
+                <h2 className="crumb-title">
+                    <span className="crumb-title-main">我的统计</span>
+                    <span className="crumb-title-sub">我的个人做题统计信息</span>
+                </h2>
                 <Row>
                     <Col lg={12}>
                         <h2>我的统计</h2>

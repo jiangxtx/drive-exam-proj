@@ -21,7 +21,7 @@ class TopicPanel extends Component {
     render() {
         let { totalNum, currentIndex } = this.props;
         totalNum = totalNum || 100;
-        currentIndex = currentIndex || -1;
+        currentIndex = currentIndex || 0;
 
         const panelArr = [];
         for (let i=0; i<totalNum; i++) {
@@ -36,7 +36,9 @@ class TopicPanel extends Component {
         return (
             <Card title="答题卡" className="topicPanel-wrap">
                 <div className="topicPanel">
-                    { panelArr }
+                    <div>
+                        { panelArr }
+                    </div>
                 </div>
             </Card>
         )

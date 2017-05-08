@@ -50,8 +50,10 @@ class Main extends Component {
                             )) }
                         </Menu>
                     </Col>
-                    <Col lg={10} md={10} sm={10}>
-                        { this.props.children }
+                    <Col lg={10} md={10} sm={10} >
+                        <div style={{amrginRight:'32px'}}>
+                            { this.props.children }
+                        </div>
                     </Col>
                 </Row>
             </ContainerFluid>

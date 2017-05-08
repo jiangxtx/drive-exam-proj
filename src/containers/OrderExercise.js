@@ -49,7 +49,10 @@ class OrderExercise extends Component {
         return (
             <Spin spinning={isFetching}>
 
-                <h2>模拟考试 > 科目一 > 顺序练习</h2>
+                <h2 className="crumb-title">
+                    <span className="crumb-title-main">顺序练习</span>
+                    <span className="crumb-title-sub">从头至尾依次练习题库中的所有习题</span>
+                </h2>
 
                 { !!idsArr.length &&
                     <ExerciseMainpart idsArr={idsArr} />
