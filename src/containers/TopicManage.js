@@ -4,7 +4,7 @@ import '../css/public/public.css'
 
 import React ,{Component}from  'react'
 import { Link } from 'react-router'
-import { Menu,Input,Table, Icon,Modal,Form,Spin, notification } from 'antd'
+import { Menu,Input,Table, Icon,Modal,Tag, Spin, Button } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 import { custom_fetch } from '../Tool/wrap.fetch'
 import DataTable from '../components/DataTable'
@@ -56,24 +56,49 @@ class Main extends Component {
                 dataIndex: 'type',
                 key: 'type',
                 width: 60,
+                render: data => (data == 1) ? '选择题' : '填空题',
             }, {
                 title: '难度系数',
                 dataIndex: 'difficulty',
                 key: 'difficulty',
                 width: 60,
+                render: data => {
+                    switch (~~data) {
+                        case 1:
+                            return <Tag color="#2db7f5">容易</Tag>;
+                        case 2:
+                            return <Tag color="#3dbff5">较易</Tag>;
+                        case 3:
+                            return <Tag color="#4dbdf5">适中</Tag>;
+                        case 4:
+                            return <Tag color="orange">较难</Tag>;
+                        case 5:
+                            return <Tag color="pink">很难</Tag>;
+                        default:
+                            return <Tag color="red">极难</Tag>;
+                    }
+
+                }
+            }, {
+                title: '操作',
+                dataIndex: 'data',
+                key: 'data',
+                width: 80,
+                render: data => {
+                    return <Button type="primary" icon="cloud" size="small">详情</Button>
+                }
             }
         ];
 
         return (
             <Row>
-                <Spin spinning={false}>
-                    <h2>试题管理</h2>
-
-                    <DataTable
-                        columns={columns}
-                        dataSource={topicsData}
-                    />
-
+                <Spin spinning={isFetching}>
+                    <div className="admin-tablWrap">
+                        <DataTable
+                            columns={columns}
+                            dataSource={topicsData}
+                        />
+                    </div>
                 </Spin>
             </Row>
         )
