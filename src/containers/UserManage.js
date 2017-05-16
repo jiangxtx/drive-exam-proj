@@ -4,7 +4,7 @@ import '../css/public/public.css'
 
 import React ,{Component}from  'react'
 import { Link } from 'react-router'
-import { Menu,Input,Table, Icon,Modal,Tag, Spin, Button } from 'antd'
+import { Menu,Input,Table, Icon,Modal,Popconfirm, Spin, Button } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 import { custom_fetch } from '../Tool/wrap.fetch'
 import DataTable from '../components/DataTable'
@@ -18,6 +18,12 @@ class Main extends Component {
             topicsData: []
         };
 
+        this.onDeleteUser = this.onDeleteUser.bind(this)
+
+    }
+
+    onDeleteUser(userId) {
+        alert('userId: ' + userId)
     }
 
     componentDidMount() {
@@ -53,8 +59,16 @@ class Main extends Component {
                 key: 'id',
                 width: 80,
                 render: data => {
-                    return <Button type="primary" icon="cloud" size="small">删除</Button> +
-                        <Button type="primary" icon="cloud" size="small">更改密码</Button>
+                    return (
+                        <div>
+                            <Popconfirm title="你确定要删除该用户信息吗？"
+                                        onConfirm={() => this.onDeleteUser(data)}
+                            >
+                                <Button type="primary" ghost size="small">删除</Button>&nbsp;&nbsp;&nbsp;
+                            </Popconfirm>
+                            <Button type="danger" ghost size="small">更改密码</Button>
+                        </div>
+                    )
                 }
             }
         ];

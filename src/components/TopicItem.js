@@ -11,6 +11,7 @@ import { cutFloat_dot2 } from '../Tool/number.tool'
 import { contentConvert, convertKeySteps, convertYourAnswer, convertAnalysis, convertGapUnderline } from '../Tool/topicContentAnalysis'
 
 import { custom_fetch } from '../Tool/wrap.fetch'
+import { topicDifficultyLevel } from '../Utils/topicRelated.util'
 
 const RadioGroup = Radio.Group;
 
@@ -178,7 +179,7 @@ export default class extends Component {
 
         let {
             optionA, optionB, optionC, optionD, explain,
-            optionType, wrongRate, mediaContent, answer
+            optionType, wrongRate, mediaContent, answer, difficulty,
         } = detailInfo || {};
         const contentArr = [optionA, optionB, optionC, optionD];
         const analysis = explain || '暂无解析';
@@ -301,10 +302,10 @@ export default class extends Component {
                 </Row>
                 { (answerState === '1') &&
                     <Row className="topicItem-info">
-                        <span className="topicItem-info-key">答题时间：</span>
-                        <span className="topicItem-info-val">{dateFormatUtil(answerTime, true)}</span>
+                        <span className="topicItem-info-key">难度系数：</span>
+                        <span className="topicItem-info-val">{topicDifficultyLevel(difficulty)}</span>
                         <span className="topicItem-info-key">本题错误率：</span>
-                        <span className="topicItem-info-val">{cutFloat_dot2(wrongRate)}%</span>
+                        <span className="topicItem-info-val">{cutFloat_dot2(wrongRate*100)}%</span>
 
                         <Button className="topicItem-info-btn"
                                 type="primary"

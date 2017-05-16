@@ -68,10 +68,6 @@ class ChapterExercise extends Component {
 
         const idsArr = chapterList[~~selectedIndex] && chapterList[~~selectedIndex].idsArr || [];
 
-        const chapterSelectDOM = chapterList.map((item, idx) => {
-            return <Option key={idx} value={`${item.index}`}>{item.name}</Option>;
-        });
-
         return (
             <Spin spinning={isFetching}>
                 <h2 className="crumb-title">
@@ -81,15 +77,19 @@ class ChapterExercise extends Component {
 
                 <div className="chapter-filter">
                     <span>章节：</span>
-                    <Select
-                        defaultValue="0"
-                        style={{ width: 380 }}
-                        placeholder="请选择一个章节"
-                        optionFilterProp="children"
-                        onChange={this.onChapterChange}
-                    >
-                        { chapterSelectDOM }
-                    </Select>
+                    { !!chapterList.length &&
+                        <Select
+                            defaultValue="0"
+                            style={{ width: 380 }}
+                            placeholder="请选择一个章节"
+                            optionFilterProp="children"
+                            onChange={this.onChapterChange}
+                        >
+                            { chapterList.map((item, idx) => {
+                                return <Option key={idx} value={`${item.index}`}>{item.name}</Option>;
+                            }) }
+                        </Select>
+                    }
                 </div>
 
                 { !!idsArr.length && <ExerciseMainpart key={selectedIndex} idsArr={idsArr} /> }

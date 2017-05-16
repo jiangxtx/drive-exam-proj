@@ -28,8 +28,7 @@ class OrderExercise extends Component {
     }
 
     queryOrderExerciseIds() {
-        const url = `http://api2.jiakaobaodian.com/api/open/exercise/sequence.htm?_r=13721661427365837087` +
-            `&cityCode=310000&page=1&limit=25&course=kemu1&carType=car&_=0.7845020336057755`;
+        const url = `http://127.0.0.1:3000/drive-getAlltopicIds`;
         custom_fetch.get(url, data => {
             const idsArr = data.data || [];
             this.setState({

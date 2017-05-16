@@ -61,3 +61,16 @@
     color: red;
     margin: 0 4px;
 }
+
+
+.chapter-filter {
+    padding-bottom: 12px;
+    font-size: 16px;
+    color: #2f5c89;
+}
+.chapter-filter > span {
+    font-weight: 600;
+}
+.chapter-filter .ant-anchor-link>.ant-anchor-link, .ant-select {
+    font-size: 14px;
+}

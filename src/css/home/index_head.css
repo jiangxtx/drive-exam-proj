@@ -2,8 +2,8 @@
     background-color: #2f5c89;
     width:100%;
     color:#fff;
-    min-height:90px;
-    line-height:90px;
+    min-height:65px;
+    line-height:65px;
 }
 .headTop a:hover {
     color: #ffff00;
@@ -13,11 +13,11 @@
 
 .headLogo{
     padding-left:0px;
-    min-height:90px;
+    min-height:65px;
 }
 .headLogo-title {
     font-size: 30px;
-    line-height: 90px;
+    line-height: 65px;
 }
 .headLogo-title a {
     color: #fff;
@@ -37,7 +37,6 @@
 
 
 .head-manageList .ant-menu {
-    /*line-height: 90px;*/
     background-color: #2f5c89;
     color: #bed8fa !important;
     text-align: center;

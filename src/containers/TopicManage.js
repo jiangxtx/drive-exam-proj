@@ -7,6 +7,7 @@ import { Link } from 'react-router'
 import { Menu,Input,Table, Icon,Modal,Tag, Spin, Button } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 import { custom_fetch } from '../Tool/wrap.fetch'
+import { topicDifficultyLevel } from '../Utils/topicRelated.util'
 import DataTable from '../components/DataTable'
 import { queryTopicDetailsByIds } from '../Tool/drive-exam-func.tool'
 
@@ -62,23 +63,7 @@ class Main extends Component {
                 dataIndex: 'difficulty',
                 key: 'difficulty',
                 width: 60,
-                render: data => {
-                    switch (~~data) {
-                        case 1:
-                            return <Tag color="#2db7f5">容易</Tag>;
-                        case 2:
-                            return <Tag color="#3dbff5">较易</Tag>;
-                        case 3:
-                            return <Tag color="#4dbdf5">适中</Tag>;
-                        case 4:
-                            return <Tag color="orange">较难</Tag>;
-                        case 5:
-                            return <Tag color="pink">很难</Tag>;
-                        default:
-                            return <Tag color="red">极难</Tag>;
-                    }
-
-                }
+                render: data => topicDifficultyLevel(data)
             }, {
                 title: '操作',
                 dataIndex: 'data',

@@ -142,6 +142,28 @@ router.get('/drive-getAlltopics', function (req, res, next) {
 })
 
 
+// 获取所有题目ID信息
+router.get('/drive-getAlltopicIds', function (req, res, next) {
+    TopicModel.find({}, function (err, topics) {
+        if (err) {
+            return res.json({
+                success: false,
+                msg: '获取题目信息失败'
+            });
+        }
+
+        const topicsIdsArr = [];
+        topics.length && topics.forEach(item => topicsIdsArr.push(item.questionId) );
+
+        return res.json({
+            success: true,
+            msg: '获取题目ID信息成功',
+            data: topicsIdsArr
+        });
+    })
+})
+
+
 // 获取章节信息
 router.get('/drive-chapters', function (req, res, next) {
     ChapterModel.find({}, function (err, docs) {
