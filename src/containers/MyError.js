@@ -64,7 +64,9 @@ class OrderExercise extends Component {
                 </h2>
 
                 { !!idsArr.length &&
-                    <ExerciseMainpart idsArr={idsArr} />
+                    <ExerciseMainpart
+                        idsArr={idsArr}
+                        ownPanel="myerror" />
                 }
             </Spin>
         )

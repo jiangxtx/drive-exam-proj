@@ -9,6 +9,7 @@ import TopicPanel from '../components/TopicPanel'
 import TopicItem from '../components/TopicItem'
 import { custom_fetch } from '../Tool/wrap.fetch'
 import { queryTopicDetailsByIds } from '../Tool/drive-exam-func.tool'
+import { cutFloat_dot2 } from '../Tool/number.tool'
 
 import ExerciseMainpart from './ExerciseMainpart'
 
@@ -170,25 +171,34 @@ export default class extends Component {
                             <div className="mystatis">
                                 <div className="mystatis-item">
                                     总共 <span className="mystatis-item-num">{allTotal}</span>题，
-                                    占据比例 <span className="mystatis-item-rate">100%</span>
+                                    占据比例 <span className="mystatis-item-rate">100.00%</span>
                                 </div>
                             </div>
                             <div className="mystatis">
                                 <div className="mystatis-item">
                                     做对 <span className="mystatis-item-num">{doneTotal - errorTotal}</span>题，
-                                    占据比例 <span className="mystatis-item-rate">100%</span>
+                                    占据比例
+                                    <span className="mystatis-item-rate">
+                                        {cutFloat_dot2(((doneTotal - errorTotal) / allTotal)*100)}%
+                                    </span>
                                 </div>
                             </div>
                             <div className="mystatis">
                                 <div className="mystatis-item">
                                     做错 <span className="mystatis-item-num">{errorTotal}</span>题，
-                                    占据比例 <span className="mystatis-item-rate">100%</span>
+                                    占据比例
+                                    <span className="mystatis-item-rate">
+                                        {cutFloat_dot2(((errorTotal) / allTotal)*100)}%
+                                    </span>
                                 </div>
                             </div>
                             <div className="mystatis">
                                 <div className="mystatis-item">
                                     未做 <span className="mystatis-item-num">{allTotal - doneTotal}</span>题，
-                                    占据比例 <span className="mystatis-item-rate">100%</span>
+                                    占据比例
+                                    <span className="mystatis-item-rate">
+                                        {cutFloat_dot2(((allTotal - doneTotal) / allTotal)*100)}%
+                                    </span>
                                 </div>
                             </div>
                         </div>

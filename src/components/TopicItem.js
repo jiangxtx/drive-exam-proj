@@ -73,6 +73,8 @@ export default class extends Component {
             isShow: true,
             answerState: '1',
         }, () => {
+            const { ownPanel, index } = this.props;
+
             // this.props.
             const userInfo = window.sessionStorage.getItem('userInfo');
             const userData = JSON.parse(userInfo || '{}');
@@ -83,15 +85,14 @@ export default class extends Component {
                 uid: userData.id,
                 _uid,
                 questionId,
-                errorFlag: (yourAnswer == answer) ? 1 : 0
+                errorFlag: (yourAnswer == answer) ? 1 : 0,
+                ownPanel,
             };
             custom_fetch.post(url, data, json => {
 
             });
 
             // 模拟考试时，把做题答案传回模拟考试板块
-            const { ownPanel, index } = this.props;
-
             if (ownPanel === 'test') {
                 this.props.returnUserAnswer(index, (yourAnswer == answer));
             }

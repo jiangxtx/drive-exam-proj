@@ -196,7 +196,7 @@ router.get('/drive-chapters', function (req, res, next) {
 
 // 记录用户做题信息
 router.post('/drive-record', function (req, res, next) {
-    const { _uid, uid, questionId, errorFlag } = req.body;
+    const { _uid, uid, questionId, errorFlag, ownPanel } = req.body;
     UserModel.find({id: uid}, function (err, docs) {
         if (!docs.length) {
             return res.json({
@@ -226,7 +226,12 @@ router.post('/drive-record', function (req, res, next) {
                 if ((errorFlag == 0) && (errorIdsArr.indexOf(questionId) === -1)) {
                     errorIdsArr.push(questionId);
                 }
-console.log('update : ', (errorFlag == 0) && (errorIdsArr.indexOf(questionId) === -1), errorIdsArr)
+                if ((errorFlag == 1) && (ownPanel == 'myerror')) {
+                    const index = errorIdsArr.indexOf(questionId);
+                    errorIdsArr.splice(index, 1);
+                }
+// console.log('update : ', (errorFlag == 0) && (errorIdsArr.indexOf(questionId) === -1), errorIdsArr)
+
                 RecordModel.update({userId: ~~uid}, {
                     doneIds: doneIdsArr.join(','),
                     errorIds: errorIdsArr.join(',')

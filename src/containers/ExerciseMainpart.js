@@ -73,7 +73,7 @@ export default class extends Component {
     }
 
     render() {
-        const { idsArr } = this.props;
+        const { idsArr, ownPanel } = this.props;
         const { isFetching, topicInfo, selectedIndex } = this.state;
 
         const detailInfo = topicInfo && topicInfo[0] || {};
@@ -86,6 +86,7 @@ export default class extends Component {
                 <Col lg={8}>
                     { !!detailInfo.questionId &&
                         <TopicItem
+                            ownPanel={ownPanel}
                             key={selectedIndex}
                             index={selectedIndex}
                             detailInfo={detailInfo}
