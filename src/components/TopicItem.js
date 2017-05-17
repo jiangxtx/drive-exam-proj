@@ -291,11 +291,11 @@ export default class extends Component {
 
                 </Row>
                 <Row>
-                    <Button type="primary" icon={btnIconType}
+                    <Button type="primary" className="topicItem-ex-btn" icon={btnIconType}
                             onClick={() => this.props.onLastOrNextTopic(~~topicIndex - 1)}>
                         上一题
                     </Button>
-                    <Button type="primary" icon={btnIconType}
+                    <Button type="primary" className="topicItem-ex-btn" icon={btnIconType}
                             onClick={() => this.props.onLastOrNextTopic(~~topicIndex + 1)} >
                         下一题
                     </Button>

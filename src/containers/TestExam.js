@@ -3,13 +3,16 @@ import '../css/candidate.css'
 
 import React ,{Component}from  'react'
 import { Link } from 'react-router'
-import { Menu,Input,Icon,Modal,Form,Alert, notification, Spin } from 'antd'
+import { Menu,Input,Tag, Modal, Button, Alert, notification, Spin } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 import TopicPanel from '../components/TopicPanel'
 import TopicItem from '../components/TopicItem'
 import CountdownTimer from '../components/CountdownTimer'
 import { custom_fetch } from '../Tool/wrap.fetch'
 import { queryTopicDetailsByIds } from '../Tool/drive-exam-func.tool'
+
+import passImg from '../img/test-pass.jpg'
+import failImg from '../img/test-fail.jpg'
 
 class Test extends Component {
     constructor(props) {
@@ -25,12 +28,20 @@ class Test extends Component {
             errorNum: 0,  // the number of answerWrong
             correctNum: 0,  // the number of answerCorrect
 
+            isTestOver: false, // 考试结束标识
+
         };
 
         this.onTopicIndexHandle = this.onTopicIndexHandle.bind(this)
         this.onLastOrNextTopic = this.onLastOrNextTopic.bind(this)
         this.returnUserAnswer = this.returnUserAnswer.bind(this)
         this.onTriggerTestEnd = this.onTriggerTestEnd.bind(this)
+        this.testAgain = this.testAgain.bind(this)
+        this.readToSubmit = this.readToSubmit.bind(this)
+    }
+
+    testAgain() {
+        window.location.reload();
     }
 
     /**
@@ -48,11 +59,30 @@ class Test extends Component {
             content = '很遗憾，您已经做错超过 10 题，请单击提交按钮提交本次考试！';
         }
 
+        const _this = this;
         showModalFlag && Modal.warning({
             title: '友情提示',
             content,
+            okText: '提交',
             onOk() {
+                _this.setState({
+                    isTestOver: true,
+                })
+            },
+        });
+    }
 
+    readToSubmit() {
+        const _this = this;
+        Modal.confirm({
+            title: '友情提示',
+            content: '您确定要提交当前的考试吗？',
+            okText: '提交',
+            cancelText: '取消',
+            onOk() {
+                _this.setState({
+                    isTestOver: true,
+                })
             },
         });
     }
@@ -116,6 +146,7 @@ class Test extends Component {
 
         Modal.info({
             title: '温馨提示',
+            okText: '确定',
             content: (
                 <div>
                     <p>按交管部门通知，科目一考试系统全面更新。
@@ -147,15 +178,16 @@ class Test extends Component {
 
     render() {
         const {
-            examTopicInfos, selectedIndex,
+            examTopicInfos, selectedIndex, isTestOver,
             isFetching, isCountdown, errorNum, correctNum
         } = this.state;
         const detailInfo = examTopicInfos[~~selectedIndex] || {};
 
+        const undoNum = 100 - (~~errorNum) - (~~correctNum);
+
         const alert_description = (
             <div>
-                <p>本试卷包括 40 道判断题和 60 道选择题，全为客观题。</p>
-                <p>考试的总时间为 45 分钟。</p>
+                <p>本试卷包括 40 道判断题和 60 道选择题，全为客观题。考试的总时间为 45 分钟</p>
                 <p>您当前的<strong>做错题数</strong>为：
                     <span className="panelItem-info-errorNo">{errorNum}</span>。
                     您当前的<strong>做对题数</strong>为：
@@ -164,9 +196,27 @@ class Test extends Component {
             </div>
         )
 
+        if (isTestOver) {
+            return (
+                <div style={{margin: '38px'}}>
+                    <img className="test-result-img" src={~~correctNum > 90 ? passImg : failImg} alt="loading..." />
+                    <p>您本次考试得分：<strong style={{color: 'red'}}>{correctNum} 分</strong></p>
+                    <p>共做错 <strong style={{color: 'green'}}>{errorNum}</strong> 题</p>
+                    <p>共未答 <strong style={{color: 'green'}}>{undoNum}</strong> 题</p>
+
+                    <Button type="primary"
+                            style={{width:'150px', fontSize:'16px', height:'32px'}}
+                            onClick={this.testAgain}>
+                        再考一次
+                    </Button>
+                </div>
+            )
+        }
 
         return (
             <Spin size="large" spinning={isFetching}>
+                <Tag className="test-btn-submit" color="red" onClick={this.readToSubmit}>交卷</Tag>
+
                 <h2 className="crumb-title">
                     <span className="crumb-title-main">全真模拟测试</span>
                     <span className="crumb-title-sub">驾照科目一考试-全真模拟测试</span>

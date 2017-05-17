@@ -242,3 +242,10 @@ img {
 .ant-radio-wrapper {
     font-size: 14px;
 }
+
+.topicItem-ex-btn {
+    width: 120px;
+    margin-right: 8px;
+    height: 32px;
+    font-size: 14px;
+}
