@@ -97,7 +97,8 @@ class ImportManage extends Component {
         return (
             <Row>
                 <Spin spinning={false}>
-                    <h2>导入管理</h2>
+                    <h2 className="import-title">导入管理</h2>
+                    <h3 className="import-subtitle">导入操作，请务必慎重，仅需系统初始化阶段操作即可！！</h3>
 
                     <div className="importManage">
                         <Button type='primary'

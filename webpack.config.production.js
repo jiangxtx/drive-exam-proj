@@ -9,38 +9,17 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin'); //抽取CSS文�
 //const vendorArr = [ 'jquery','antd','react','react-dom', 'react-router', 'react-redux', 'redux','react-umeditor','react-slick']
 
 module.exports = {
-    //devtool: 'eval-source-map',
     entry: {
-        // 'index'     : [path.join(__dirname,'index.js')],
-        // 'student'   : [path.join(__dirname,'student.js')],
-        // 'teacher'   : [path.join(__dirname,'teacher.js')],
-        // 'manager'   : [path.join(__dirname,'manager.js')],
-        'index'     : ['es5-shim','es5-shim/es5-sham','console-polyfill','core-js/fn/object/assign',
-            'es6-promise','fetchAjax-ie8','babel-polyfill',path.join(__dirname,'index.js')],
-        'student'   : ['es5-shim','es5-shim/es5-sham','console-polyfill','core-js/fn/object/assign',
-            'es6-promise','fetchAjax-ie8','babel-polyfill',path.join(__dirname,'student.js')],
-        'teacher'   : ['es5-shim','es5-shim/es5-sham','console-polyfill','core-js/fn/object/assign',
-            'es6-promise','fetchAjax-ie8','babel-polyfill',path.join(__dirname,'teacher.js')],
-        'manager'   : ['es5-shim','es5-shim/es5-sham','console-polyfill','core-js/fn/object/assign',
-            'es6-promise','fetchAjax-ie8','babel-polyfill',path.join(__dirname,'manager.js')],
-        //'vendor'    : vendorArr,
+        'index'     : path.join(__dirname,'public/index.js'),
     },
+
     output: {
         path: path.join(__dirname, 'dist'),
         publicPath: '/static/',
         filename: "[name].js",
         library: '[name]'
     },
-    // ,
-    // externals: {
-    //     // 'es5-shim':'Es5Shim',
-    //     // 'console-polyfill':'ConsolePolyfill',
-    //     // 'es6-promise':'Es6Promise',
-    //     // 'babel-polyfill':'BabelPolyfill',
-    //     'jquery':'jQuery',
-    //     'react': 'React',
-    //     'react-dom': 'ReactDOM',
-    // },
+
     module: {
         loaders: [
             // { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
@@ -53,7 +32,7 @@ module.exports = {
             {test: /\.json$/,   loader: 'json-loader'},
             { test: /\.svg$/,  loader: "url-loader?limit=10000&mimetype=image/svg+xml" },
             {
-                test: /\.(jpeg|gif)$/,
+                test: /\.(jpeg|jpg|gif)$/,
                 loader: 'file-loader'
             },
             {
@@ -72,12 +51,14 @@ module.exports = {
             },
         ],
     },
+
     resolve:{
         extensions:['','.js','.json','.css','.less'],
         modulesDirectories: [
             'node_modules'
         ]
     },
+
     plugins: [
         //new ExtractTextPlugin("dist/bundle.css"),
         // definePlugin 接收字符串插入到代码当中, 所以你需要的话可以写上 JS 的字符串
@@ -89,7 +70,7 @@ module.exports = {
         }),
         new webpack.DllReferencePlugin({
             context: __dirname,
-            manifest: require('./dist/manifest.json') // 用来引入 DllPlugin 输出的 manifest.json 文件。
+            manifest: require('./manifest.json') // 用来引入 DllPlugin 输出的 manifest.json 文件。
         }),
         new webpack.optimize.UglifyJsPlugin({     //代码压缩(webpack内建插件webPack.optimize.UglifyJsPlugin)
             compress:{

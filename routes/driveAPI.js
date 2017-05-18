@@ -86,6 +86,18 @@ router.post('/drive-login', function (req, res, next) {
 
 })
 
+// 用户删除
+router.post(`/drive-deleteUser`, function (req, res, next) {
+    const { userId } = req.body;
+    UserModel.remove({ id: userId }, function (err, docs) {
+        const flag = !err;
+        return res.json({
+            success: flag,
+            msg: flag ? '成功删除用户' : '删除用户失败',
+        });
+    })
+})
+
 // 获取所有用户信息
 router.get('/drive-getAllusers', function (req, res, next) {
     UserModel.find({}, function (err, users) {

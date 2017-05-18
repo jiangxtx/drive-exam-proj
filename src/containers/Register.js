@@ -1,6 +1,6 @@
 import React ,{Component}from 'react'
 import { Link } from 'react-router'
-import { Card, Form, Icon, Input, Button, Checkbox } from 'antd'
+import { Card, Form, Icon, Input, Button, notification } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 import { drawNetCanvas } from '../Tool/drawNetCanvas'
 import RegisterSuccessFrom from './RegisterSuccessForm'
@@ -71,14 +71,20 @@ class Register extends Component {
 
         const regstUrl = 'http://127.0.0.1:3000/drive-regst';
         custom_fetch.post(regstUrl, data, json => {
-            alert(json.msg)
-            console.log('login data:' , json)
+            const isSuceess = json.success || false;
+            if (isSuceess) {
+                window.location.href = `/public/index.html#/login`;
+            }
+            notification[isSuceess ? 'success' : 'error']({
+                message: '注册提示',
+                description: json.msg
+            })
 
         })
 
-        this.setState({
+        /*this.setState({
             registerSuccess: true,
-        })
+        })*/
     }
 
     componentDidMount() {
@@ -93,9 +99,9 @@ class Register extends Component {
                 { !this.state.registerSuccess &&
                     <div className="loginPanel">
                         <Card title={<div className="loginPanel-title">用户注册</div>}
-                              style={{backgroundColor:'#f5f5f5'}}
+                              style={{backgroundColor:'#f5f5f5', padding: '24px'}}
                               bordered={false} >
-                            <RegisterForm handleRegisterSubmit={this.handleRegisterSubmit.bind(this)} /> :
+                            <RegisterForm handleRegisterSubmit={this.handleRegisterSubmit} /> :
                         </Card>
                     </div>
                 }

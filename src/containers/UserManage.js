@@ -4,7 +4,7 @@ import '../css/public/public.css'
 
 import React ,{Component}from  'react'
 import { Link } from 'react-router'
-import { Menu,Input,Table, Icon,Modal,Popconfirm, Spin, Button } from 'antd'
+import { Menu,Input,Table, Icon,Modal, notification, Spin, Button } from 'antd'
 import { Container, ContainerFluid, Row, Col } from '../layout'
 import { custom_fetch } from '../Tool/wrap.fetch'
 import DataTable from '../components/DataTable'
@@ -19,14 +19,36 @@ class Main extends Component {
         };
 
         this.onDeleteUser = this.onDeleteUser.bind(this)
+        this.queryAllUsers = this.queryAllUsers.bind(this)
 
     }
 
-    onDeleteUser(userId) {
-        alert('userId: ' + userId)
+    onDeleteUser(userData) {
+        // alert('userId: ' + userData.id)
+
+        Modal.confirm({
+            title: '删除用户',
+            content: `确定要删除用户 ${userData.name} 吗？`,
+            okText: '确定',
+            cancelText: '取消',
+            onOk: () => {
+                const url = `http://127.0.0.1:3000/drive-deleteUser`;
+                custom_fetch.post(url, { userId: userData.id}, json => {
+                    // debugger
+                    if (json.success) {
+                        this.queryAllUsers();
+                    }
+                    notification[json.success ? 'success' : 'error']({
+                        message: '删除提示',
+                        description: json.msg
+                    })
+                })
+            },
+
+        });
     }
 
-    componentDidMount() {
+    queryAllUsers() {
         const url = `http://127.0.0.1:3000/drive-getAllusers`;
         custom_fetch.get(url, json => {
             // debugger
@@ -39,6 +61,10 @@ class Main extends Component {
                 alert(json.msg)
             }
         })
+    }
+
+    componentDidMount() {
+        this.queryAllUsers();
     }
 
     render() {
@@ -59,15 +85,14 @@ class Main extends Component {
                 dataIndex: 'id',
                 key: 'id',
                 width: 80,
-                render: data => {
+                render: (id, data) => {
                     return (
                         <div>
-                            <Popconfirm title="你确定要删除该用户信息吗？"
-                                        onConfirm={() => this.onDeleteUser(data)}
-                            >
-                                <Button type="primary" ghost size="small">删除</Button>&nbsp;&nbsp;&nbsp;
-                            </Popconfirm>
-                            <Button type="danger" ghost size="small">更改密码</Button>
+                            <Button type="primary" ghost size="small"
+                                    onClick={() => this.onDeleteUser(data)} >
+                                删除</Button>&nbsp;&nbsp;&nbsp;
+                            <Button type="danger" size="small" >
+                                更改密码</Button>
                         </div>
                     )
                 }
@@ -75,16 +100,16 @@ class Main extends Component {
         ];
 
         return (
-            <Row>
-                <Spin spinning={isFetching}>
+            <Spin spinning={isFetching}>
+                <Row>
                     <div className="admin-tablWrap">
                         <DataTable
                             columns={columns}
                             dataSource={topicsData}
                         />
                     </div>
-                </Spin>
-            </Row>
+                </Row>
+            </Spin>
         )
     }
 }

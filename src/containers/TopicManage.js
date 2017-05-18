@@ -19,6 +19,21 @@ class Main extends Component {
             topicsData: []
         };
 
+        this.openEditModal = this.openEditModal.bind(this)
+    }
+
+    openEditModal() {
+        Modal.info({
+            title: '题目详情/编辑',
+            content: (
+                <div style={{textAlign: 'center'}}>
+                    <h4>敬请期待.....</h4>
+                </div>
+            ),
+            onOk() {
+
+            },
+        });
     }
 
     componentDidMount() {
@@ -41,7 +56,7 @@ class Main extends Component {
             {
                 title: '试题ID',
                 dataIndex: 'id',
-                width: 60,
+                width: 80,
                 key: 'id',
             }, {
                 title: '题干',
@@ -68,9 +83,18 @@ class Main extends Component {
                 title: '操作',
                 dataIndex: 'data',
                 key: 'data',
-                width: 80,
+                width: 180,
                 render: data => {
-                    return <Button type="primary" icon="cloud" size="small">详情</Button>
+                    return (
+                        <div>
+                            <Button type="default" icon="cloud" size="small"
+                                    onClick={this.openEditModal}>详情</Button>
+                            &nbsp;&nbsp;&nbsp;
+                            <Button type="primary" icon="edit" size="small"
+                                    onClick={this.openEditModal}>编辑</Button>
+
+                        </div>
+                    )
                 }
             }
         ];

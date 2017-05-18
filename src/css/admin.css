@@ -5,3 +5,18 @@
 .admin-tablWrap {
     margin: 28px 28px 28px 0;
 }
+
+.import-subtitle {
+    margin: 18px 12px;
+    color: green;
+}
+.import-title {
+    margin-top: 25px;
+}
+.importManage button.ant-btn {
+    display: block;
+    margin: 12px;
+    width: 180px;
+    height: 38px;
+    font-size: 14px;
+}
