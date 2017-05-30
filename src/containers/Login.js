@@ -75,7 +75,7 @@ const LoginForm = Form.create()( React.createClass({
                         <span className="login-form-forgot">没有账号？
                             <Link to="register" style={{color:'red'}}>现在注册!</Link>
                         </span>
-                        <a href="#">忘记密码</a>
+                        {/*<a href="#">忘记密码</a>*/}
                     </p>
                 </FormItem>
             </Form>
