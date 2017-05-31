@@ -20,6 +20,7 @@ class Main extends Component {
         };
 
         this.openEditModal = this.openEditModal.bind(this)
+        this.openShowDetailModal = this.openShowDetailModal.bind(this)
     }
 
     openEditModal() {
@@ -34,6 +35,43 @@ class Main extends Component {
 
             },
         });
+    }
+
+    openShowDetailModal(topicId, type) {
+        const url = `http://127.0.0.1:3000/drive-queryTopicsByIds?`;
+        const idsStr = [];
+        idsStr.push(topicId)
+        const data = {
+            uid: 1,
+            _uid: 11111,
+            idsStr: JSON.stringify(idsStr),
+        };
+        custom_fetch.post(url, data, json => {
+            const detail = json.data[0];
+
+            Modal.info({
+                title: '题目详情/编辑',
+                content: (
+                    <div style={{textAlign: 'left'}}>
+                        <p>{detail.question}</p>
+                        { (type == 1) &&
+                            <div>
+                                <div className="detailItem-option">A. {detail.optionA}</div>
+                                <div className="detailItem-option">B. {detail.optionB}</div>
+                                <div className="detailItem-option">C. {detail.optionC}</div>
+                                <div className="detailItem-option">D. {detail.optionD}</div>
+                            </div>
+                        }
+                        <div>
+                            <div className="detailItem-answer">答案：{detail.answer}</div>
+                        </div>
+                    </div>
+                ),
+                onOk() {
+
+                },
+            });
+        })
     }
 
     componentDidMount() {
@@ -72,7 +110,7 @@ class Main extends Component {
                 dataIndex: 'type',
                 key: 'type',
                 width: 60,
-                render: data => (data == 1) ? '选择题' : '填空题',
+                render: data => (data == 1) ? '选择题' : '判断题',
             }, {
                 title: '难度系数',
                 dataIndex: 'difficulty',
@@ -84,11 +122,11 @@ class Main extends Component {
                 dataIndex: 'data',
                 key: 'data',
                 width: 180,
-                render: data => {
+                render: (id, data) => {
                     return (
                         <div>
                             <Button type="default" icon="cloud" size="small"
-                                    onClick={this.openEditModal}>详情</Button>
+                                    onClick={ () => this.openShowDetailModal(data.id, data.type) }>详情</Button>
                             &nbsp;&nbsp;&nbsp;
                             <Button type="primary" icon="edit" size="small"
                                     onClick={this.openEditModal}>编辑</Button>
