@@ -25,7 +25,7 @@ class Main extends Component {
 
     openEditModal() {
         Modal.info({
-            title: '题目详情/编辑',
+            title: '题目编辑',
             content: (
                 <div style={{textAlign: 'center'}}>
                     <h4>敬请期待.....</h4>
@@ -35,6 +35,17 @@ class Main extends Component {
 
             },
         });
+    }
+
+    convertAnswer(value, topicType) {
+        if (topicType === 0) { //判断题
+            return value === 16 ? '正确' : '错误';
+        } else {
+            return (value === 16) ? 'A' :
+                (value === 32) ? 'B' :
+                    (value === 64) ? 'C' :
+                        (value ===128) ? 'D' : 'X';
+        }
     }
 
     openShowDetailModal(topicId, type) {
@@ -50,7 +61,7 @@ class Main extends Component {
             const detail = json.data[0];
 
             Modal.info({
-                title: '题目详情/编辑',
+                title: '题目详情',
                 content: (
                     <div style={{textAlign: 'left'}}>
                         <p>{detail.question}</p>
@@ -63,7 +74,9 @@ class Main extends Component {
                             </div>
                         }
                         <div>
-                            <div className="detailItem-answer">答案：{detail.answer}</div>
+                            <div className="detailItem-answer">
+                                答案：{this.convertAnswer(detail.answer, type)}
+                            </div>
                         </div>
                     </div>
                 ),

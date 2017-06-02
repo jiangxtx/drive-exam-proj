@@ -69,6 +69,7 @@ router.post('/drive-regst', function (req, res, next) {
     })
 });
 
+
 // 用户登录
 router.post('/drive-login', function (req, res, next) {
     const { username, password } = req.body;
@@ -84,6 +85,20 @@ router.post('/drive-login', function (req, res, next) {
         });
     })
 
+})
+
+// 管理员-更改用户密码
+router.post('/drive-updatePwd', function (req, res, next) {
+    const { id, newPwd } = req.body;
+
+    UserModel.update({id: ~~id}, {
+        password: newPwd
+    }, function (error) {
+        return res.json({
+            success: !error,
+            msg: '更改用户密码成功',
+        });
+    })
 })
 
 // 用户删除

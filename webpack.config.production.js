@@ -15,7 +15,7 @@ module.exports = {
 
     output: {
         path: path.join(__dirname, 'dist'),
-        publicPath: '/static/',
+        publicPath: '/',
         filename: "[name].js",
         library: '[name]'
     },
