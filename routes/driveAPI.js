@@ -265,8 +265,6 @@ router.post('/drive-record', function (req, res, next) {
                 }, function (error) {
                     if (error) {
                         console.error(error);
-                    } else {
-                        console.error("更新用户名成功")
                     }
                 })
             }
