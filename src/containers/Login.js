@@ -23,6 +23,10 @@ const LoginForm = Form.create()( React.createClass({
                 console.log('Received values of form: ', values);
 
                 if (values.username === 'admin' && values.password === '123456') {
+                    window.sessionStorage.setItem('userInfo', JSON.stringify({
+                        name: 'admin',
+                        id: -1,
+                    }));
                     window.location.href = './index.html#/admin';
                 } else {
                     custom_fetch.post('http://127.0.0.1:3000/drive-login', values, json => {

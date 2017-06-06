@@ -74,7 +74,7 @@ class Head extends Component {
         );
         const userinfoJSX = (
             <div className="headLogin">
-                欢饮您，<Link activeClassName="link-active" to="register">{name}</Link>
+                欢饮您，<Link activeClassName="link-active" >{name}</Link>
                 <span style={{marginLeft:"5px",marginRight:"5px"}}>|</span>
                 <Link activeClassName="link-active" onClick={this.onLogout}>退出</Link>
             </div>
