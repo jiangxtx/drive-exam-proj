@@ -73,7 +73,8 @@ class Register extends Component {
         custom_fetch.post(regstUrl, data, json => {
             const isSuceess = json.success || false;
             if (isSuceess) {
-                window.location.href = `/public/index.html#/login`;
+                // window.location.href = `/index.html#/login`;
+                this.context.router.push('/login')
             }
             notification[isSuceess ? 'success' : 'error']({
                 message: '注册提示',
@@ -124,6 +125,9 @@ class Register extends Component {
             </div>
         )
     }
+}
+Register.contextTypes = {
+    router: React.PropTypes.object.isRequired,
 }
 
 export default Register
