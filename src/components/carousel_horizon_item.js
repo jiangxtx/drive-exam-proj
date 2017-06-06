@@ -18,10 +18,10 @@ const oneLineStyle = {
     textOverflow: 'ellipsis'
 }
 
-class CarouselHorizonItem extends Component{
+class Main extends Component{
     constructor(props){
         super(props)
-        this.state={
+        this.state= {
 
         }
     }
@@ -43,4 +43,5 @@ class CarouselHorizonItem extends Component{
     }
 }
 
-export default CarouselHorizonItem
+
+export default Main

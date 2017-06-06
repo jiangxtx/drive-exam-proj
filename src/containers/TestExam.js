@@ -93,6 +93,7 @@ class Test extends Component {
      * @param isCorrect 是否答对标识
      */
     returnUserAnswer(index, isCorrect) {
+        // console.log('return User answer: ', index, isCorrect)
         index = ~~index;
         let { hasAnsweredIds, errorNum, correctNum } = this.state;
 
@@ -247,6 +248,7 @@ class Test extends Component {
                         }
 
                         <TopicPanel totalNum={100}
+                                    currentIndex={selectedIndex}
                                     onTopicIndexHandle={this.onTopicIndexHandle} />
                     </Col>
                 </Row>
