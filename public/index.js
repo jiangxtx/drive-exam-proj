@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import {Provider} from 'react-redux'
+
 import route from '../src/routes/route'
 import configureStore from '../src/store/index'
 
